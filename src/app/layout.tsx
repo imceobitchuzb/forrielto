@@ -5,11 +5,13 @@ import { LanguageProvider } from "@/components/providers/LanguageProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
+import { PageTransition } from "@/components/motion/PageTransition";
 import { siteConfig } from "@/content/config";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-cormorant",
   display: "swap",
 });
@@ -62,10 +64,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={`${cormorant.variable} ${inter.variable}`}>
-      <body className="font-sans bg-[#F5F2EC] text-[#20211F] min-h-screen flex flex-col selection:bg-[#20211F] selection:text-[#F5F2EC]">
+      <body className="font-sans bg-[#F6F3EC] text-[#1C1D1A] min-h-screen flex flex-col selection:bg-[#1C1D1A] selection:text-[#F6F3EC]">
         <LanguageProvider>
+          <ScrollProgress />
           <Header />
-          <main className="flex-grow">{children}</main>
+          <main className="flex-grow">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
           <StickyMobileCTA />
         </LanguageProvider>

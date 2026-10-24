@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { siteConfig } from "@/content/config";
 import { Menu, X, ArrowUpRight, Send, ChevronDown } from "lucide-react";
@@ -14,6 +15,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdown, setServicesDropdown] = useState(false);
+  const [hoveredNav, setHoveredNav] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,7 +54,7 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           isScrolled
-            ? "bg-[#F6F3EC]/92 backdrop-blur-md border-b border-[#1C1D1A]/10 py-3.5"
+            ? "bg-[#F6F3EC]/94 backdrop-blur-md border-b border-[#1C1D1A]/10 py-3.5 shadow-sm"
             : "bg-transparent py-6 border-b border-[#1C1D1A]/5"
         )}
       >
@@ -70,80 +72,116 @@ export function Header() {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8 text-[12px] tracking-[0.16em] uppercase font-sans font-medium text-[#1C1D1A]/85">
-              {navLinks.map((item) =>
-                item.hasDropdown ? (
+            {/* Desktop Navigation with Animated Underline */}
+            <nav
+              onMouseLeave={() => setHoveredNav(null)}
+              className="hidden lg:flex items-center space-x-8 text-[12px] tracking-[0.16em] uppercase font-sans font-medium text-[#1C1D1A]/85"
+            >
+              {navLinks.map((item) => {
+                const isActive =
+                  item.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(item.href) ||
+                      (item.hasDropdown &&
+                        (pathname.startsWith("/apartment") ||
+                          pathname.startsWith("/renovation") ||
+                          pathname.startsWith("/turnkey")));
+
+                return item.hasDropdown ? (
                   <div
                     key={item.href}
                     className="relative"
-                    onMouseEnter={() => setServicesDropdown(true)}
+                    onMouseEnter={() => {
+                      setServicesDropdown(true);
+                      setHoveredNav(item.href);
+                    }}
                     onMouseLeave={() => setServicesDropdown(false)}
                   >
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex items-center space-x-1 py-1 hover:text-[#9E7448] transition-colors group",
-                        pathname.startsWith("/services") ||
-                          pathname.startsWith("/apartment") ||
-                          pathname.startsWith("/renovation") ||
-                          pathname.startsWith("/turnkey")
-                          ? "text-[#9E7448] font-semibold"
-                          : ""
+                        "flex items-center space-x-1 py-1 transition-colors relative group",
+                        isActive ? "text-[#9E7448] font-semibold" : "hover:text-[#9E7448]"
                       )}
                     >
                       <span>{item.name}</span>
-                      <ChevronDown className="w-3 h-3 opacity-50 group-hover:rotate-180 transition-transform duration-300" />
+                      <ChevronDown
+                        className={cn(
+                          "w-3 h-3 opacity-50 transition-transform duration-300",
+                          servicesDropdown ? "rotate-180" : ""
+                        )}
+                      />
+                      {(isActive || hoveredNav === item.href) && (
+                        <motion.span
+                          layoutId="nav-underline"
+                          className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#9E7448]"
+                          transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+                        />
+                      )}
                     </Link>
 
-                    {/* Architectural Dropdown */}
-                    {servicesDropdown && (
-                      <div className="absolute top-full -left-4 w-72 pt-3 animate-fadeIn">
-                        <div className="bg-[#FAF8F4] border border-[#1C1D1A]/12 shadow-2xl p-3 flex flex-col space-y-1">
-                          <div className="px-3 py-1 text-[9px] font-mono tracking-widest text-[#9E7448] uppercase border-b border-[#1C1D1A]/8 pb-1.5 mb-1">
-                            Направления экспертизы
+                    {/* Architectural Dropdown with Smooth Animation */}
+                    <AnimatePresence>
+                      {servicesDropdown && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                          className="absolute top-full -left-4 w-72 pt-3"
+                        >
+                          <div className="bg-[#FAF8F4] border border-[#1C1D1A]/12 shadow-2xl p-3 flex flex-col space-y-1">
+                            <div className="px-3 py-1 text-[9px] font-mono tracking-widest text-[#9E7448] uppercase border-b border-[#1C1D1A]/8 pb-1.5 mb-1">
+                              Направления экспертизы
+                            </div>
+                            {item.subItems?.map((sub) => (
+                              <Link
+                                key={sub.href}
+                                href={sub.href}
+                                className={cn(
+                                  "flex items-center justify-between px-3 py-2 text-xs normal-case tracking-normal transition-colors rounded-none",
+                                  pathname === sub.href
+                                    ? "bg-[#1C1D1A] text-[#F6F3EC]"
+                                    : "text-[#1C1D1A] hover:bg-[#EBE6DC]"
+                                )}
+                              >
+                                <span className="font-serif font-medium">{sub.name}</span>
+                                <span className="font-mono text-[10px] opacity-60">
+                                  № {sub.index}
+                                </span>
+                              </Link>
+                            ))}
                           </div>
-                          {item.subItems?.map((sub) => (
-                            <Link
-                              key={sub.href}
-                              href={sub.href}
-                              className={cn(
-                                "flex items-center justify-between px-3 py-2 text-xs normal-case tracking-normal transition-colors rounded-none",
-                                pathname === sub.href
-                                  ? "bg-[#1C1D1A] text-[#F6F3EC]"
-                                  : "text-[#1C1D1A] hover:bg-[#EBE6DC]"
-                              )}
-                            >
-                              <span className="font-serif font-medium">{sub.name}</span>
-                              <span className="font-mono text-[10px] opacity-60">
-                                № {sub.index}
-                              </span>
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 ) : (
                   <Link
                     key={item.href}
                     href={item.href}
+                    onMouseEnter={() => setHoveredNav(item.href)}
                     className={cn(
-                      "py-1 hover:text-[#9E7448] transition-colors relative",
-                      pathname === item.href
-                        ? "text-[#9E7448] font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-[#9E7448]"
-                        : "after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#9E7448] hover:after:w-full after:transition-all after:duration-300"
+                      "py-1 transition-colors relative",
+                      isActive ? "text-[#9E7448] font-semibold" : "hover:text-[#9E7448]"
                     )}
                   >
-                    {item.name}
+                    <span>{item.name}</span>
+                    {(isActive || hoveredNav === item.href) && (
+                      <motion.span
+                        layoutId="nav-underline"
+                        className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#9E7448]"
+                        transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+                      />
+                    )}
                   </Link>
-                )
-              )}
+                );
+              })}
             </nav>
 
-            {/* Right actions: Language toggle, direct Telegram, and CTA */}
+            {/* Right actions */}
             <div className="hidden lg:flex items-center space-x-6">
-              {/* Minimalist Language Switcher */}
+              {/* Language Switcher */}
               <div className="flex items-center space-x-2 text-[11px] font-mono tracking-wider">
                 <button
                   onClick={() => setLocale("ru")}
@@ -182,14 +220,16 @@ export function Header() {
                 <span className="font-mono text-[11px]">@Anna_040506</span>
               </a>
 
-              {/* Consultation Button */}
-              <Link
-                href="/contact"
-                className="inline-flex items-center space-x-2 px-5 py-2.5 bg-[#1C1D1A] hover:bg-[#9E7448] text-[#F6F3EC] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-300 border border-[#1C1D1A]"
-              >
-                <span>{t.nav.bookConsultation}</span>
-                <ArrowUpRight className="w-3.5 h-3.5 opacity-70" />
-              </Link>
+              {/* Consultation Button with subtle hover spring */}
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center space-x-2 px-5 py-2.5 bg-[#1C1D1A] hover:bg-[#9E7448] text-[#F6F3EC] text-[11px] uppercase tracking-[0.2em] font-medium transition-colors border border-[#1C1D1A]"
+                >
+                  <span>{t.nav.bookConsultation}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-70" />
+                </Link>
+              </motion.div>
             </div>
 
             {/* Mobile Actions: Language + Hamburger */}
@@ -228,68 +268,76 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu Drawer */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#F6F3EC] pt-24 px-6 pb-8 flex flex-col justify-between overflow-y-auto lg:hidden animate-fadeIn">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between border-b border-[#1C1D1A]/10 pb-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#9E7448] uppercase">
-                Навигация по разделам
-              </span>
-              <span className="text-[10px] font-mono text-[#6E6B64]">ТАШКЕНТ</span>
-            </div>
-
-            <div className="flex flex-col space-y-4 text-left">
-              <Link
-                href="/services"
-                className="text-2xl font-serif font-normal text-[#1C1D1A]"
-              >
-                {t.nav.services}
-              </Link>
-              <div className="pl-4 flex flex-col space-y-2.5 text-xs font-mono text-[#6E6B64] border-l border-[#9E7448]/40">
-                <Link href="/apartment-inspection">01. {t.nav.apartmentInspection}</Link>
-                <Link href="/renovation-supervision">02. {t.nav.renovationSupervision}</Link>
-                <Link href="/turnkey-renovation">03. {t.nav.turnkeyRenovation}</Link>
+      {/* Animated Mobile Menu Drawer */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 bg-[#F6F3EC] pt-24 px-6 pb-8 flex flex-col justify-between overflow-y-auto lg:hidden"
+          >
+            <div className="space-y-6">
+              <div className="flex items-center justify-between border-b border-[#1C1D1A]/10 pb-3">
+                <span className="text-[10px] font-mono tracking-widest text-[#9E7448] uppercase">
+                  Навигация по разделам
+                </span>
+                <span className="text-[10px] font-mono text-[#6E6B64]">ТАШКЕНТ</span>
               </div>
 
-              <Link href="/portfolio" className="text-2xl font-serif font-normal text-[#1C1D1A]">
-                {t.nav.portfolio}
-              </Link>
-              <Link href="/about" className="text-2xl font-serif font-normal text-[#1C1D1A]">
-                {t.nav.about}
-              </Link>
-              <Link href="/reviews" className="text-2xl font-serif font-normal text-[#1C1D1A]">
-                {t.nav.reviews}
-              </Link>
-              <Link href="/faq" className="text-2xl font-serif font-normal text-[#1C1D1A]">
-                {t.nav.faq}
-              </Link>
-              <Link href="/contact" className="text-2xl font-serif font-normal text-[#1C1D1A]">
-                {t.nav.contact}
-              </Link>
-            </div>
-          </div>
+              <div className="flex flex-col space-y-4 text-left">
+                <Link
+                  href="/services"
+                  className="text-2xl font-serif font-normal text-[#1C1D1A]"
+                >
+                  {t.nav.services}
+                </Link>
+                <div className="pl-4 flex flex-col space-y-2.5 text-xs font-mono text-[#6E6B64] border-l border-[#9E7448]/40">
+                  <Link href="/apartment-inspection">01. {t.nav.apartmentInspection}</Link>
+                  <Link href="/renovation-supervision">02. {t.nav.renovationSupervision}</Link>
+                  <Link href="/turnkey-renovation">03. {t.nav.turnkeyRenovation}</Link>
+                </div>
 
-          <div className="pt-8 border-t border-[#1C1D1A]/10 space-y-3">
-            <Link
-              href="/contact"
-              className="w-full flex items-center justify-center space-x-2 py-3.5 bg-[#1C1D1A] text-[#F6F3EC] text-xs uppercase tracking-widest font-medium"
-            >
-              <span>{t.nav.bookConsultation}</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
-            <a
-              href={siteConfig.telegramDirectUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full flex items-center justify-center space-x-2 py-3 border border-[#1C1D1A]/20 text-[#1C1D1A] text-xs uppercase tracking-widest font-medium"
-            >
-              <Send className="w-4 h-4 text-[#9E7448]" />
-              <span>Telegram: @Anna_040506</span>
-            </a>
-          </div>
-        </div>
-      )}
+                <Link href="/portfolio" className="text-2xl font-serif font-normal text-[#1C1D1A]">
+                  {t.nav.portfolio}
+                </Link>
+                <Link href="/about" className="text-2xl font-serif font-normal text-[#1C1D1A]">
+                  {t.nav.about}
+                </Link>
+                <Link href="/reviews" className="text-2xl font-serif font-normal text-[#1C1D1A]">
+                  {t.nav.reviews}
+                </Link>
+                <Link href="/faq" className="text-2xl font-serif font-normal text-[#1C1D1A]">
+                  {t.nav.faq}
+                </Link>
+                <Link href="/contact" className="text-2xl font-serif font-normal text-[#1C1D1A]">
+                  {t.nav.contact}
+                </Link>
+              </div>
+            </div>
+
+            <div className="pt-8 border-t border-[#1C1D1A]/10 space-y-3">
+              <Link
+                href="/contact"
+                className="w-full flex items-center justify-center space-x-2 py-3.5 bg-[#1C1D1A] text-[#F6F3EC] text-xs uppercase tracking-widest font-medium"
+              >
+                <span>{t.nav.bookConsultation}</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+              <a
+                href={siteConfig.telegramDirectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center space-x-2 py-3 border border-[#1C1D1A]/20 text-[#1C1D1A] text-xs uppercase tracking-widest font-medium"
+              >
+                <Send className="w-4 h-4 text-[#9E7448]" />
+                <span>Telegram: @Anna_040506</span>
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

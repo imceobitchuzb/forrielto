@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/components/providers/LanguageProvider";
+import { FadeIn } from "@/components/motion/MotionPrimitives";
 import { cn } from "@/lib/utils";
 
 export function ProcessTimeline() {
@@ -137,98 +139,109 @@ export function ProcessTimeline() {
     ],
   };
 
+  const tabs = [
+    { id: "inspection", label: `01. ${t.process.tabs.inspection}` },
+    { id: "supervision", label: `02. ${t.process.tabs.supervision}` },
+    { id: "turnkey", label: `03. ${t.process.tabs.turnkey}` },
+  ] as const;
+
   const currentSteps = processes[activeTab];
 
   return (
     <section className="py-24 sm:py-32 bg-[#F6F3EC] border-b border-[#1C1D1A]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-12 border-b border-[#1C1D1A]/10 gap-6">
-          <div className="max-w-3xl">
-            <span className="text-[10px] font-mono tracking-[0.25em] text-[#9E7448] uppercase block mb-2 font-semibold">
-              {t.process.tag}
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#1C1D1A] leading-[1.06]">
-              {t.process.headline}
-            </h2>
-            <p className="text-sm sm:text-base text-[#6E6B64] mt-3 leading-relaxed max-w-xl">
-              {t.process.subheadline}
-            </p>
+        <FadeIn>
+          <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-12 border-b border-[#1C1D1A]/10 gap-6">
+            <div className="max-w-3xl">
+              <span className="text-[10px] font-mono tracking-[0.25em] text-[#9E7448] uppercase block mb-2 font-semibold">
+                {t.process.tag}
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#1C1D1A] leading-[1.06]">
+                {t.process.headline}
+              </h2>
+              <p className="text-sm sm:text-base text-[#6E6B64] mt-3 leading-relaxed max-w-xl">
+                {t.process.subheadline}
+              </p>
+            </div>
+            <div className="font-mono text-[10px] text-[#6E6B64] tracking-widest uppercase">
+              STRUCTURED EXECUTION ROADMAP
+            </div>
           </div>
-          <div className="font-mono text-[10px] text-[#6E6B64] tracking-widest uppercase">
-            STRUCTURED EXECUTION ROADMAP
-          </div>
-        </div>
+        </FadeIn>
 
-        {/* Process Navigation Tabs */}
+        {/* Process Navigation Tabs with Animated Pill */}
         <div className="flex flex-wrap gap-3 pb-8">
-          <button
-            onClick={() => setActiveTab("inspection")}
-            className={cn(
-              "px-5 py-2.5 text-xs font-mono uppercase tracking-[0.16em] transition-all",
-              activeTab === "inspection"
-                ? "bg-[#1C1D1A] text-[#F6F3EC]"
-                : "bg-[#FAF8F4] text-[#6E6B64] hover:text-[#1C1D1A] border border-[#1C1D1A]/12"
-            )}
-          >
-            01. {t.process.tabs.inspection}
-          </button>
-          <button
-            onClick={() => setActiveTab("supervision")}
-            className={cn(
-              "px-5 py-2.5 text-xs font-mono uppercase tracking-[0.16em] transition-all",
-              activeTab === "supervision"
-                ? "bg-[#1C1D1A] text-[#F6F3EC]"
-                : "bg-[#FAF8F4] text-[#6E6B64] hover:text-[#1C1D1A] border border-[#1C1D1A]/12"
-            )}
-          >
-            02. {t.process.tabs.supervision}
-          </button>
-          <button
-            onClick={() => setActiveTab("turnkey")}
-            className={cn(
-              "px-5 py-2.5 text-xs font-mono uppercase tracking-[0.16em] transition-all",
-              activeTab === "turnkey"
-                ? "bg-[#1C1D1A] text-[#F6F3EC]"
-                : "bg-[#FAF8F4] text-[#6E6B64] hover:text-[#1C1D1A] border border-[#1C1D1A]/12"
-            )}
-          >
-            03. {t.process.tabs.turnkey}
-          </button>
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={cn(
+                  "relative px-5 py-2.5 text-xs font-mono uppercase tracking-[0.16em] transition-colors",
+                  isActive
+                    ? "text-[#F6F3EC]"
+                    : "text-[#6E6B64] hover:text-[#1C1D1A] bg-[#FAF8F4] border border-[#1C1D1A]/12"
+                )}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="process-tab-active"
+                    className="absolute inset-0 bg-[#1C1D1A] z-0"
+                    transition={{ type: "spring", bounce: 0.15, duration: 0.45 }}
+                  />
+                )}
+                <span className="relative z-10">{tab.label}</span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* 5 Phased Execution Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 pt-6">
-          {currentSteps.map((item, index) => (
-            <div
-              key={index}
-              className="bg-[#FAF8F4] border border-[#1C1D1A]/12 p-6 flex flex-col justify-between hover:border-[#9E7448] transition-all group"
-            >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[#1C1D1A]/8">
-                  <span className="font-mono text-xl font-normal text-[#9E7448]">
-                    {item.step}
-                  </span>
-                  <span className="font-mono text-[9px] text-[#6E6B64] tracking-wider uppercase">
-                    {item.phase}
-                  </span>
+        {/* 5 Phased Execution Steps with AnimatePresence */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 pt-6"
+          >
+            {currentSteps.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
+                className="bg-[#FAF8F4] border border-[#1C1D1A]/12 p-6 flex flex-col justify-between hover:border-[#9E7448] transition-all group"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#1C1D1A]/8">
+                    <span className="font-mono text-xl font-normal text-[#9E7448]">
+                      {item.step}
+                    </span>
+                    <span className="font-mono text-[9px] text-[#6E6B64] tracking-wider uppercase">
+                      {item.phase}
+                    </span>
+                  </div>
+
+                  <h3 className="font-serif text-lg font-normal text-[#1C1D1A] leading-snug group-hover:text-[#9E7448] transition-colors">
+                    {locale === "ru" ? item.titleRu : item.titleUz}
+                  </h3>
+
+                  <p className="text-xs text-[#6E6B64] leading-relaxed">
+                    {locale === "ru" ? item.descRu : item.descUz}
+                  </p>
                 </div>
 
-                <h3 className="font-serif text-lg font-normal text-[#1C1D1A] leading-snug group-hover:text-[#9E7448] transition-colors">
-                  {locale === "ru" ? item.titleRu : item.titleUz}
-                </h3>
-
-                <p className="text-xs text-[#6E6B64] leading-relaxed">
-                  {locale === "ru" ? item.descRu : item.descUz}
-                </p>
-              </div>
-
-              <div className="pt-6 mt-6 border-t border-[#1C1D1A]/5 text-[9px] font-mono text-[#9E7448] uppercase tracking-wider">
-                {locale === "ru" ? `ЭТАП ${index + 1} / 5` : `${index + 1} / 5 BOSQICH`}
-              </div>
-            </div>
-          ))}
-        </div>
+                <div className="pt-6 mt-6 border-t border-[#1C1D1A]/5 text-[9px] font-mono text-[#9E7448] uppercase tracking-wider">
+                  {locale === "ru" ? `ЭТАП ${index + 1} / 5` : `${index + 1} / 5 BOSQICH`}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

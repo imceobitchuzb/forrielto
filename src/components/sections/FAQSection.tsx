@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/components/providers/LanguageProvider";
-import { faqItems, FAQItem } from "@/content/faq";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { faqItems } from "@/content/faq";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FAQSectionProps {
@@ -33,31 +34,43 @@ export function FAQSection({ categoryFilter, limit }: FAQSectionProps) {
           <div
             key={item.id}
             className={cn(
-              "border rounded-sm transition-all duration-200 bg-[#FAF8F5]",
-              isOpen ? "border-[#A8794A]" : "border-[#20211F]/10 hover:border-[#20211F]/30"
+              "border transition-colors duration-200 bg-[#FAF8F4]",
+              isOpen ? "border-[#9E7448]" : "border-[#1C1D1A]/12 hover:border-[#9E7448]/40"
             )}
           >
             <button
               onClick={() => toggleOpen(item.id)}
-              className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 focus:outline-none"
+              className="w-full text-left p-6 sm:p-7 flex items-center justify-between gap-4 focus:outline-none"
               aria-expanded={isOpen}
             >
-              <span className="font-serif text-base sm:text-lg font-bold text-[#20211F]">
+              <span className="font-serif text-lg sm:text-xl font-normal text-[#1C1D1A]">
                 {locale === "ru" ? item.questionRu : item.questionUz}
               </span>
-              <ChevronDown
-                className={cn(
-                  "w-5 h-5 text-[#A8794A] flex-shrink-0 transition-transform duration-300",
-                  isOpen ? "rotate-180" : ""
-                )}
-              />
+              <motion.div
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="flex-shrink-0"
+              >
+                <ChevronDown className="w-4 h-4 text-[#9E7448]" />
+              </motion.div>
             </button>
 
-            {isOpen && (
-              <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-[#77746D] leading-relaxed border-t border-[#20211F]/5 animate-fadeIn">
-                <p>{locale === "ru" ? item.answerRu : item.answerUz}</p>
-              </div>
-            )}
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  key="content"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-6 sm:px-7 pb-7 pt-1 text-xs sm:text-sm text-[#6E6B64] leading-relaxed border-t border-[#1C1D1A]/8">
+                    <p>{locale === "ru" ? item.answerRu : item.answerUz}</p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         );
       })}

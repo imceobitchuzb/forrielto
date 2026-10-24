@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { portfolioCases } from "@/content/portfolio";
 import { ArrowUpRight } from "lucide-react";
@@ -33,90 +34,110 @@ export function PortfolioGrid({ showFilter = false, limit }: PortfolioGridProps)
 
   return (
     <div className="space-y-12">
-      {/* Category filters */}
+      {/* Category filters with animated active pill */}
       {showFilter && (
         <div className="flex flex-wrap gap-2.5 pb-4 border-b border-[#1C1D1A]/10">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={cn(
-                "px-4 py-2 text-xs font-mono uppercase tracking-[0.16em] transition-all",
-                selectedCategory === cat.id
-                  ? "bg-[#1C1D1A] text-[#F6F3EC]"
-                  : "bg-[#FAF8F4] text-[#6E6B64] hover:text-[#1C1D1A] border border-[#1C1D1A]/12"
-              )}
-            >
-              {locale === "ru" ? cat.labelRu : cat.labelUz}
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const isActive = selectedCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={cn(
+                  "relative px-4 py-2 text-xs font-mono uppercase tracking-[0.16em] transition-colors",
+                  isActive
+                    ? "text-[#F6F3EC]"
+                    : "text-[#6E6B64] hover:text-[#1C1D1A] bg-[#FAF8F4] border border-[#1C1D1A]/12"
+                )}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="portfolio-filter-active"
+                    className="absolute inset-0 bg-[#1C1D1A] z-0"
+                    transition={{ type: "spring", bounce: 0.15, duration: 0.45 }}
+                  />
+                )}
+                <span className="relative z-10">{locale === "ru" ? cat.labelRu : cat.labelUz}</span>
+              </button>
+            );
+          })}
         </div>
       )}
 
-      {/* Grid of cases */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-        {displayed.map((item) => (
-          <Link
-            key={item.slug}
-            href={`/portfolio/${item.slug}`}
-            className="group bg-[#FAF8F4] border border-[#1C1D1A]/12 overflow-hidden hover:border-[#9E7448] transition-all duration-500 shadow-sm hover:shadow-2xl flex flex-col justify-between"
-          >
-            <div>
-              {/* Cover Image Container */}
-              <div className="arch-img-frame aspect-[16/10] bg-[#EBE6DC] relative">
-                <Image
-                  src={item.coverImage}
-                  alt={locale === "ru" ? item.titleRu : item.titleUz}
-                  fill
-                  className="object-cover group-hover:scale-[1.03] transition-transform duration-1000"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1D1A]/75 via-transparent to-transparent" />
+      {/* Grid of cases with AnimatePresence & layout transitions */}
+      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <AnimatePresence mode="popLayout">
+          {displayed.map((item) => (
+            <motion.div
+              layout
+              key={item.slug}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Link
+                href={`/portfolio/${item.slug}`}
+                className="group bg-[#FAF8F4] border border-[#1C1D1A]/12 overflow-hidden hover:border-[#9E7448] transition-all duration-500 shadow-sm hover:shadow-2xl flex flex-col justify-between h-full"
+              >
+                <div>
+                  {/* Cover Image Container */}
+                  <div className="arch-img-frame aspect-[16/10] bg-[#EBE6DC] relative">
+                    <Image
+                      src={item.coverImage}
+                      alt={locale === "ru" ? item.titleRu : item.titleUz}
+                      fill
+                      className="object-cover group-hover:scale-[1.03] transition-transform duration-1000"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1C1D1A]/75 via-transparent to-transparent pointer-events-none" />
 
-                {/* Category & Status Tags */}
-                <div className="absolute top-4 left-4 bg-[#1C1D1A]/80 text-[#F6F3EC] px-3 py-1 text-[9px] font-mono uppercase tracking-[0.2em] backdrop-blur-sm border border-white/10">
-                  {locale === "ru" ? item.categoryLabelRu : item.categoryLabelUz}
-                </div>
+                    {/* Category & Status Tags */}
+                    <div className="absolute top-4 left-4 bg-[#1C1D1A]/80 text-[#F6F3EC] px-3 py-1 text-[9px] font-mono uppercase tracking-[0.2em] backdrop-blur-sm border border-white/10 z-20">
+                      {locale === "ru" ? item.categoryLabelRu : item.categoryLabelUz}
+                    </div>
 
-                <div className="absolute bottom-4 left-4 font-mono text-[10px] text-[#B88E5E] tracking-wider uppercase">
-                  {locale === "ru" ? item.statusRu : item.statusUz}
-                </div>
-              </div>
-
-              {/* Text Meta */}
-              <div className="p-6 sm:p-8 space-y-3">
-                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors leading-snug">
-                  {locale === "ru" ? item.titleRu : item.titleUz}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#6E6B64] leading-relaxed line-clamp-3">
-                  {locale === "ru" ? item.descriptionRu : item.descriptionUz}
-                </p>
-
-                {item.findingsRu && (
-                  <div className="pt-3 border-t border-[#1C1D1A]/8">
-                    <span className="text-[9px] font-mono text-[#9E7448] uppercase tracking-[0.2em] block mb-2 font-semibold">
-                      {locale === "ru" ? "КЛЮЧЕВЫЕ ФИКСАЦИИ ПО ШНК:" : "ASOSIY NATIJALAR:"}
-                    </span>
-                    <ul className="space-y-1.5">
-                      {(locale === "ru" ? item.findingsRu : item.findingsUz || []).slice(0, 2).map((f, i) => (
-                        <li key={i} className="text-xs text-[#1C1D1A]/80 flex items-start space-x-2">
-                          <span className="text-[#9E7448] mt-0.5">•</span>
-                          <span className="line-clamp-1">{f}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="absolute bottom-4 left-4 font-mono text-[10px] text-[#B88E5E] tracking-wider uppercase z-20">
+                      {locale === "ru" ? item.statusRu : item.statusUz}
+                    </div>
                   </div>
-                )}
-              </div>
-            </div>
 
-            {/* Read case study CTA link */}
-            <div className="px-6 sm:px-8 pb-6 pt-3 flex items-center justify-between text-xs font-mono tracking-[0.2em] uppercase text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors border-t border-[#1C1D1A]/8">
-              <span>{locale === "ru" ? "Изучить кейс" : "Keysni ko'rish"}</span>
-              <ArrowUpRight className="w-4 h-4 opacity-70 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </div>
-          </Link>
-        ))}
-      </div>
+                  {/* Text Meta */}
+                  <div className="p-6 sm:p-8 space-y-3">
+                    <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors leading-snug">
+                      {locale === "ru" ? item.titleRu : item.titleUz}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#6E6B64] leading-relaxed line-clamp-3">
+                      {locale === "ru" ? item.descriptionRu : item.descriptionUz}
+                    </p>
+
+                    {item.findingsRu && (
+                      <div className="pt-3 border-t border-[#1C1D1A]/8">
+                        <span className="text-[9px] font-mono text-[#9E7448] uppercase tracking-[0.2em] block mb-2 font-semibold">
+                          {locale === "ru" ? "КЛЮЧЕВЫЕ ФИКСАЦИИ ПО ШНК:" : "ASOSIY NATIJALAR:"}
+                        </span>
+                        <ul className="space-y-1.5">
+                          {(locale === "ru" ? item.findingsRu : item.findingsUz || []).slice(0, 2).map((f, i) => (
+                            <li key={i} className="text-xs text-[#1C1D1A]/80 flex items-start space-x-2">
+                              <span className="text-[#9E7448] mt-0.5">•</span>
+                              <span className="line-clamp-1">{f}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Read case study CTA link */}
+                <div className="px-6 sm:px-8 pb-6 pt-3 flex items-center justify-between text-xs font-mono tracking-[0.2em] uppercase text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors border-t border-[#1C1D1A]/8">
+                  <span>{locale === "ru" ? "Изучить кейс" : "Keysni ko'rish"}</span>
+                  <ArrowUpRight className="w-4 h-4 opacity-70 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
     </div>
   );
 }
