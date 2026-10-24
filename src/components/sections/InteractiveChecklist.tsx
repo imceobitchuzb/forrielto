@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
-import { inspectionChecklist, ChecklistCategory } from "@/content/checklist";
-import { CheckSquare, Square, AlertCircle, ChevronRight } from "lucide-react";
+import { inspectionChecklist } from "@/content/checklist";
+import { CheckSquare, Square } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function InteractiveChecklist() {
@@ -18,32 +18,39 @@ export function InteractiveChecklist() {
   const currentCategory = inspectionChecklist.find((c) => c.id === activeCategory) || inspectionChecklist[0];
 
   return (
-    <div className="bg-[#FAF8F5] border border-[#20211F]/10 rounded-sm p-6 sm:p-10 shadow-editorial">
-      <div className="max-w-2xl mb-8">
-        <span className="text-[11px] font-mono tracking-widest text-[#A8794A] uppercase font-semibold">
-          {locale === "ru" ? "Интерактивный чек-лист" : "Interaktiv tekshiruv ro'yxati"}
-        </span>
-        <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#20211F] mt-1.5 leading-snug">
-          {locale === "ru" ? "Что необходимо проверить перед подписанием акта" : "Dalolatnomani imzolashdan oldin nimalarni tekshirish kerak"}
-        </h3>
-        <p className="text-xs sm:text-sm text-[#77746D] mt-2">
-          {locale === "ru"
-            ? "Переключайтесь между разделами и отмечайте пункты. Экспертная приёмка охватывает все эти параметры инструментально."
-            : "Bo'limlar o'rtasida o'ting va bandlarni belgilang. Ekspert ko'rigi barcha parametrlarni instrumental tekshiradi."}
-        </p>
+    <div className="bg-[#FAF8F4] border border-[#1C1D1A]/12 p-6 sm:p-10 shadow-xl">
+      <div className="flex flex-col md:flex-row md:items-end justify-between pb-6 mb-8 border-b border-[#1C1D1A]/10 gap-4">
+        <div className="max-w-2xl">
+          <span className="text-[10px] font-mono tracking-[0.25em] text-[#9E7448] uppercase block mb-1 font-semibold">
+            {locale === "ru" ? "ПРОТОКОЛ ПРИЁМКИ" : "QABUL PROTOKOLI"}
+          </span>
+          <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1C1D1A]">
+            {locale === "ru"
+              ? "Что обязательно проверяется перед подписанием акта"
+              : "Dalolatnoma imzolashdan oldin nimalar tekshiriladi"}
+          </h3>
+          <p className="text-xs sm:text-sm text-[#6E6B64] mt-2">
+            {locale === "ru"
+              ? "Интерактивный перечень критических узлов. Отметьте параметры, чтобы оценить важность инструментального контроля."
+              : "Muhim tugunlarning interaktiv ro'yxati. Instrumental nazorat muhimligini baholang."}
+          </p>
+        </div>
+        <div className="font-mono text-[10px] text-[#6E6B64] uppercase tracking-widest">
+          STANDARDS // ШНК & КМК
+        </div>
       </div>
 
       {/* Category Tabs */}
-      <div className="flex flex-wrap gap-2 pb-6 border-b border-[#20211F]/10">
+      <div className="flex flex-wrap gap-2.5 pb-6 border-b border-[#1C1D1A]/10">
         {inspectionChecklist.map((cat) => (
           <button
             key={cat.id}
             onClick={() => setActiveCategory(cat.id)}
             className={cn(
-              "px-4 py-2 text-xs font-semibold rounded-sm transition-all",
+              "px-4 py-2 text-xs font-mono uppercase tracking-[0.16em] transition-all",
               activeCategory === cat.id
-                ? "bg-[#20211F] text-[#F5F2EC]"
-                : "bg-white text-[#77746D] hover:text-[#20211F] border border-[#20211F]/10"
+                ? "bg-[#1C1D1A] text-[#F6F3EC]"
+                : "bg-white text-[#6E6B64] hover:text-[#1C1D1A] border border-[#1C1D1A]/12"
             )}
           >
             {locale === "ru" ? cat.titleRu : cat.titleUz}
@@ -62,32 +69,32 @@ export function InteractiveChecklist() {
               key={idx}
               onClick={() => toggleCheck(itemKey)}
               className={cn(
-                "p-4 sm:p-5 rounded-sm border cursor-pointer transition-all duration-200 select-none",
+                "p-5 border cursor-pointer transition-all duration-200 select-none",
                 isChecked
-                  ? "bg-[#EAE5DC]/80 border-[#A8794A]"
-                  : "bg-white border-[#20211F]/10 hover:border-[#20211F]/30"
+                  ? "bg-[#EBE6DC]/80 border-[#9E7448]"
+                  : "bg-white border-[#1C1D1A]/10 hover:border-[#9E7448]/50"
               )}
             >
-              <div className="flex items-start space-x-3">
-                <div className="mt-0.5 text-[#A8794A] flex-shrink-0">
+              <div className="flex items-start space-x-3.5">
+                <div className="mt-0.5 text-[#9E7448] flex-shrink-0">
                   {isChecked ? (
-                    <CheckSquare className="w-5 h-5 text-[#A8794A]" />
+                    <CheckSquare className="w-4 h-4 text-[#9E7448]" />
                   ) : (
-                    <Square className="w-5 h-5 text-[#77746D]/60" />
+                    <Square className="w-4 h-4 text-[#6E6B64]/50" />
                   )}
                 </div>
                 <div className="space-y-1">
                   <h4
                     className={cn(
-                      "text-sm font-semibold transition-colors",
-                      isChecked ? "text-[#20211F] line-through opacity-70" : "text-[#20211F]"
+                      "text-sm font-medium transition-colors font-serif",
+                      isChecked ? "text-[#1C1D1A] line-through opacity-60" : "text-[#1C1D1A]"
                     )}
                   >
                     {item.label}
                   </h4>
-                  <p className="text-xs text-[#77746D] leading-relaxed">
-                    <span className="text-[#A8794A] font-medium">
-                      {locale === "ru" ? "Риск: " : "Xavf: "}
+                  <p className="text-xs text-[#6E6B64] leading-relaxed">
+                    <span className="text-[#9E7448] font-mono text-[10px] uppercase tracking-wider block">
+                      {locale === "ru" ? "Риск без проверки: " : "Tekshiruvsiz xavf: "}
                     </span>
                     {item.risk}
                   </p>
@@ -99,17 +106,17 @@ export function InteractiveChecklist() {
       </div>
 
       {/* Bottom Advice */}
-      <div className="mt-8 pt-6 border-t border-[#20211F]/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <p className="text-xs text-[#77746D]">
+      <div className="mt-8 pt-6 border-t border-[#1C1D1A]/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-xs">
+        <p className="text-[#6E6B64] text-[11px]">
           {locale === "ru"
-            ? "⚠️ Визуального осмотра недостаточно: скрытые дефекты определяются тепловизором, нивелиром и тестерами."
-            : "⚠️ Oddiy ko'z bilan ko'rik yetarli emas: yashirin nuqsonlar teplovizor va lazer asboblari orqali aniqlanadi."}
+            ? "⚠️ Визуальный осмотр не выявляет пустоты в стяжке и продувание рам. Необходима аппаратная диагностика."
+            : "⚠️ Oddiy ko'z bilan ko'rik yashirin nuqsonlarni aniqlamaydi. Apparat diagnostikasi zarur."}
         </p>
         <a
           href="/contact"
-          className="flex-shrink-0 inline-flex items-center space-x-1.5 text-xs font-semibold text-[#20211F] hover:text-[#A8794A] transition-colors uppercase tracking-wider font-mono"
+          className="flex-shrink-0 text-[#1C1D1A] hover:text-[#9E7448] transition-colors uppercase tracking-[0.2em] font-semibold border-b border-[#1C1D1A] pb-0.5"
         >
-          <span>{locale === "ru" ? "Заказать инструментальный аудит →" : "Instrumental audit buyurtma qilish →"}</span>
+          {locale === "ru" ? "Заказать аудит →" : "Audit buyurtma qilish →"}
         </a>
       </div>
     </div>

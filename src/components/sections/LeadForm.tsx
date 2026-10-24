@@ -57,14 +57,19 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
 
   if (status === "success") {
     return (
-      <div className="bg-[#FAF8F5] border border-[#A8794A]/30 p-8 sm:p-10 rounded-sm text-center space-y-5 animate-fadeIn">
-        <div className="w-14 h-14 mx-auto rounded-full bg-[#A8794A]/10 flex items-center justify-center text-[#A8794A]">
-          <CheckCircle2 className="w-8 h-8" />
+      <div className="bg-[#FAF8F4] border border-[#9E7448]/40 p-8 sm:p-12 text-center space-y-6 animate-fadeIn shadow-2xl">
+        <div className="w-14 h-14 mx-auto rounded-none bg-[#9E7448]/10 border border-[#9E7448] flex items-center justify-center text-[#9E7448]">
+          <CheckCircle2 className="w-7 h-7" />
         </div>
-        <h3 className="text-2xl font-serif font-bold text-[#20211F]">
-          {t.contact.successTitle}
-        </h3>
-        <p className="text-sm text-[#77746D] max-w-md mx-auto leading-relaxed">
+        <div className="space-y-2">
+          <span className="font-mono text-[10px] tracking-widest text-[#9E7448] uppercase">
+            REGISTRATION CONFIRMED
+          </span>
+          <h3 className="text-2xl sm:text-3xl font-serif font-normal text-[#1C1D1A]">
+            {t.contact.successTitle}
+          </h3>
+        </div>
+        <p className="text-xs sm:text-sm text-[#6E6B64] max-w-md mx-auto leading-relaxed">
           {t.contact.successDesc}
         </p>
         <div className="pt-2">
@@ -72,9 +77,9 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
             href={siteConfig.telegramDirectUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 px-6 py-3 bg-[#20211F] text-[#F5F2EC] text-xs uppercase tracking-wider font-medium hover:bg-[#A8794A] transition-colors rounded-sm"
+            className="inline-flex items-center space-x-2 px-6 py-3.5 bg-[#1C1D1A] text-[#F6F3EC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#9E7448] transition-colors border border-[#1C1D1A]"
           >
-            <Send className="w-4 h-4 text-[#A8794A]" />
+            <Send className="w-3.5 h-3.5 text-[#B88E5E]" />
             <span>Перейти в Telegram (@Anna_040506)</span>
           </a>
         </div>
@@ -86,7 +91,7 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
     <form
       onSubmit={handleSubmit}
       className={cn(
-        "bg-[#FAF8F5] border border-[#20211F]/10 p-6 sm:p-10 rounded-sm space-y-6 shadow-editorial",
+        "bg-[#FAF8F4] border border-[#1C1D1A]/15 p-6 sm:p-10 space-y-6 shadow-2xl",
         className
       )}
     >
@@ -101,19 +106,22 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
         autoComplete="off"
       />
 
-      <div className="space-y-1">
-        <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#20211F]">
+      <div className="space-y-1.5 pb-2 border-b border-[#1C1D1A]/10">
+        <span className="font-mono text-[9px] tracking-[0.25em] text-[#9E7448] uppercase block">
+          INQUIRY DOSSIER
+        </span>
+        <h3 className="text-2xl sm:text-3xl font-serif font-normal text-[#1C1D1A]">
           {t.contact.formTitle}
         </h3>
-        <p className="text-xs text-[#77746D]">
+        <p className="text-xs text-[#6E6B64]">
           {locale === "ru"
-            ? "Заполните короткую форму — Анна свяжется с вами для уточнения деталей"
-            : "Qisqa shaklni to'ldiring — Anna tafsilotlarni aniqlashtirish uchun siz bilan bog'lanadi"}
+            ? "Заполните форму — эксперт свяжется для согласования выезда на объект"
+            : "Shaklni to'ldiring — ekspert obyektga chiqishni kelishish uchun bog'lanadi"}
         </p>
       </div>
 
       {status === "error" && (
-        <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-sm flex items-start space-x-2">
+        <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs flex items-start space-x-2">
           <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
           <span>{errorMessage}</span>
         </div>
@@ -122,7 +130,7 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Name */}
         <div className="space-y-1.5">
-          <label className="text-[11px] font-mono tracking-wider uppercase text-[#77746D]">
+          <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block">
             {t.contact.namePlaceholder} *
           </label>
           <input
@@ -130,14 +138,14 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
             required
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            placeholder={locale === "ru" ? "Как к вам обращаться" : "Ismingiz"}
-            className="w-full px-3.5 py-2.5 bg-white border border-[#20211F]/15 rounded-sm text-sm text-[#20211F] placeholder-[#77746D]/50 focus:outline-none focus:border-[#A8794A] transition-colors"
+            placeholder={locale === "ru" ? "Имя и фамилия" : "Ismingiz"}
+            className="w-full px-3.5 py-3 bg-white border border-[#1C1D1A]/15 rounded-none text-sm text-[#1C1D1A] placeholder-[#6E6B64]/50 focus:outline-none focus:border-[#9E7448] transition-colors"
           />
         </div>
 
         {/* Phone */}
         <div className="space-y-1.5">
-          <label className="text-[11px] font-mono tracking-wider uppercase text-[#77746D]">
+          <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block">
             {t.contact.phonePlaceholder} *
           </label>
           <input
@@ -146,7 +154,7 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="+998 (90) 000-00-00"
-            className="w-full px-3.5 py-2.5 bg-white border border-[#20211F]/15 rounded-sm text-sm text-[#20211F] placeholder-[#77746D]/50 focus:outline-none focus:border-[#A8794A] transition-colors"
+            className="w-full px-3.5 py-3 bg-white border border-[#1C1D1A]/15 rounded-none text-sm text-[#1C1D1A] placeholder-[#6E6B64]/50 focus:outline-none focus:border-[#9E7448] transition-colors font-mono"
           />
         </div>
       </div>
@@ -154,13 +162,13 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Service */}
         <div className="space-y-1.5">
-          <label className="text-[11px] font-mono tracking-wider uppercase text-[#77746D]">
+          <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block">
             {t.contact.serviceSelect}
           </label>
           <select
             value={formData.service}
             onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-            className="w-full px-3.5 py-2.5 bg-white border border-[#20211F]/15 rounded-sm text-sm text-[#20211F] focus:outline-none focus:border-[#A8794A] transition-colors"
+            className="w-full px-3.5 py-3 bg-white border border-[#1C1D1A]/15 rounded-none text-xs text-[#1C1D1A] focus:outline-none focus:border-[#9E7448] transition-colors"
           >
             <option value="inspection">{t.contact.serviceOptions.inspection}</option>
             <option value="supervision">{t.contact.serviceOptions.supervision}</option>
@@ -171,13 +179,13 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
 
         {/* Preferred Channel */}
         <div className="space-y-1.5">
-          <label className="text-[11px] font-mono tracking-wider uppercase text-[#77746D]">
+          <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block">
             {t.contact.channelSelect}
           </label>
           <select
             value={formData.channel}
             onChange={(e) => setFormData({ ...formData, channel: e.target.value })}
-            className="w-full px-3.5 py-2.5 bg-white border border-[#20211F]/15 rounded-sm text-sm text-[#20211F] focus:outline-none focus:border-[#A8794A] transition-colors"
+            className="w-full px-3.5 py-3 bg-white border border-[#1C1D1A]/15 rounded-none text-xs text-[#1C1D1A] focus:outline-none focus:border-[#9E7448] transition-colors"
           >
             <option value="telegram">{t.contact.channelTelegram}</option>
             <option value="whatsapp">{t.contact.channelWhatsApp}</option>
@@ -188,7 +196,7 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
 
       {/* Comment / Details */}
       <div className="space-y-1.5">
-        <label className="text-[11px] font-mono tracking-wider uppercase text-[#77746D]">
+        <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block">
           {locale === "ru" ? "Детали объекта" : "Obyekt tafsilotlari"}
         </label>
         <textarea
@@ -196,20 +204,20 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
           value={formData.comment}
           onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
           placeholder={t.contact.commentPlaceholder}
-          className="w-full px-3.5 py-2.5 bg-white border border-[#20211F]/15 rounded-sm text-sm text-[#20211F] placeholder-[#77746D]/50 focus:outline-none focus:border-[#A8794A] transition-colors resize-none"
+          className="w-full px-3.5 py-3 bg-white border border-[#1C1D1A]/15 rounded-none text-xs text-[#1C1D1A] placeholder-[#6E6B64]/50 focus:outline-none focus:border-[#9E7448] transition-colors resize-none"
         />
       </div>
 
       {/* Consent & Submit */}
-      <div className="space-y-4">
-        <p className="text-[11px] text-[#77746D] leading-tight">
+      <div className="space-y-4 pt-2">
+        <p className="text-[10px] font-mono text-[#6E6B64] leading-tight">
           {t.contact.consent}
         </p>
 
         <button
           type="submit"
           disabled={status === "loading"}
-          className="w-full flex items-center justify-center space-x-2 py-3.5 bg-[#20211F] hover:bg-[#A8794A] text-[#F5F2EC] text-xs uppercase tracking-widest font-semibold rounded-sm transition-all duration-300 disabled:opacity-50"
+          className="w-full flex items-center justify-center space-x-2 py-4 bg-[#1C1D1A] hover:bg-[#9E7448] text-[#F6F3EC] text-xs uppercase tracking-[0.25em] font-medium transition-all duration-300 disabled:opacity-50 border border-[#1C1D1A]"
         >
           {status === "loading" ? (
             <>
@@ -219,7 +227,7 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
           ) : (
             <>
               <span>{t.contact.submit}</span>
-              <Send className="w-3.5 h-3.5" />
+              <Send className="w-3.5 h-3.5 opacity-80" />
             </>
           )}
         </button>

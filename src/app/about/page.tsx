@@ -6,33 +6,27 @@ import Link from "next/link";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { siteConfig } from "@/content/config";
 import { FinalCTA } from "@/components/sections/FinalCTA";
-import {
-  ShieldCheck,
-  CheckCircle2,
-  Instagram,
-  Send,
-  Award,
-  Compass,
-  ArrowUpRight,
-} from "lucide-react";
+import { Instagram, Send, ArrowUpRight } from "lucide-react";
 
 export default function AboutPage() {
   const { t, locale } = useLanguage();
 
   return (
-    <div className="pt-24 sm:pt-32">
+    <div className="pt-28 sm:pt-36">
       {/* Editorial Header */}
-      <section className="pb-16 sm:pb-20 border-b border-[#20211F]/10">
+      <section className="pb-16 sm:pb-24 border-b border-[#1C1D1A]/10 bg-grain">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-[11px] font-mono tracking-widest text-[#A8794A] uppercase font-semibold">
-            {locale === "ru" ? "ОБ ЭКСПЕРТЕ" : "EKSPERT HAQIDA"}
-          </span>
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-[#20211F] mt-2 leading-[1.05] max-w-4xl">
+          <div className="flex items-center space-x-2 font-mono text-[10px] tracking-[0.25em] text-[#9E7448] uppercase mb-3 font-semibold">
+            <span className="w-1.5 h-1.5 bg-[#9E7448]" />
+            <span>{locale === "ru" ? "ОБ ЭКСПЕРТЕ" : "EKSPERT HAQIDA"}</span>
+          </div>
+
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-[#1C1D1A] leading-[1.02] max-w-4xl">
             {locale === "ru"
               ? "Анна Гончарова: независимый контроль качества недвижимости в Ташкенте"
               : "Anna Goncharova: Toshkentda ko'chmas mulk sifatining mustaqil nazorati"}
           </h1>
-          <p className="text-base sm:text-lg text-[#77746D] mt-4 max-w-2xl leading-relaxed">
+          <p className="text-base sm:text-lg text-[#6E6B64] mt-5 max-w-2xl leading-relaxed">
             {locale === "ru"
               ? "«Из Уфы в Ташкент, без связей построила имя в строительстве». Принципиальная защита интересов собственника, инструментальная точность и честный диалог."
               : "«Ufadan Toshkentga, tanish-bilishsiz qurilish sohasida o'z nomimni yaratdim». Mulk egasi manfaatlarini himoya qilish va sifatga qat'iy yondashuv."}
@@ -41,12 +35,12 @@ export default function AboutPage() {
       </section>
 
       {/* Main Biography & Photos Grid */}
-      <section className="py-20 bg-[#FAF8F5] border-b border-[#20211F]/10">
+      <section className="py-24 bg-[#FAF8F4] border-b border-[#1C1D1A]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Visuals on the left (5 cols) */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="relative aspect-[3/4] rounded-sm overflow-hidden border border-[#20211F]/15 shadow-luxury bg-[#EAE5DC]">
+              <div className="arch-img-frame aspect-[3/4] border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC]">
                 <Image
                   src="/images/anna/post2.png"
                   alt="Анна Гончарова"
@@ -58,7 +52,7 @@ export default function AboutPage() {
 
               {/* Smaller secondary image */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="relative aspect-square rounded-sm overflow-hidden border border-[#20211F]/10 bg-[#EAE5DC]">
+                <div className="arch-img-frame aspect-square border border-[#1C1D1A]/10 bg-[#EBE6DC]">
                   <Image
                     src="/images/anna/post3.png"
                     alt="Анна Гончарова на объекте"
@@ -66,7 +60,7 @@ export default function AboutPage() {
                     className="object-cover"
                   />
                 </div>
-                <div className="relative aspect-square rounded-sm overflow-hidden border border-[#20211F]/10 bg-[#EAE5DC]">
+                <div className="arch-img-frame aspect-square border border-[#1C1D1A]/10 bg-[#EBE6DC]">
                   <Image
                     src="/images/anna/post4.png"
                     alt="Анна Гончарова"
@@ -77,8 +71,8 @@ export default function AboutPage() {
               </div>
 
               {/* Social Channels Callout */}
-              <div className="p-6 bg-[#EAE5DC]/60 border border-[#20211F]/10 rounded-sm space-y-3">
-                <span className="text-[11px] font-mono text-[#77746D] uppercase tracking-wider block">
+              <div className="p-6 bg-[#EBE6DC]/40 border border-[#1C1D1A]/10 space-y-3 font-mono">
+                <span className="text-[10px] text-[#6E6B64] uppercase tracking-widest block">
                   Официальные каналы эксперта
                 </span>
                 <div className="space-y-2">
@@ -86,51 +80,51 @@ export default function AboutPage() {
                     href={siteConfig.instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-xs font-semibold text-[#20211F] hover:text-[#A8794A] transition-colors"
+                    className="flex items-center space-x-2 text-xs text-[#1C1D1A] hover:text-[#9E7448] transition-colors"
                   >
-                    <Instagram className="w-4 h-4 text-[#A8794A]" />
-                    <span>Instagram @goncharova.expert (17K+ подписчиков)</span>
+                    <Instagram className="w-3.5 h-3.5 text-[#9E7448]" />
+                    <span>Instagram @goncharova.expert (17K+)</span>
                   </a>
                   <a
                     href={siteConfig.telegramChannelUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-xs font-semibold text-[#20211F] hover:text-[#A8794A] transition-colors"
+                    className="flex items-center space-x-2 text-xs text-[#1C1D1A] hover:text-[#9E7448] transition-colors"
                   >
-                    <Send className="w-4 h-4 text-[#A8794A]" />
+                    <Send className="w-3.5 h-3.5 text-[#9E7448]" />
                     <span>Telegram-канал @goncharovaexpert</span>
                   </a>
                   <a
                     href={siteConfig.telegramDirectUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-xs font-semibold text-[#20211F] hover:text-[#A8794A] transition-colors"
+                    className="flex items-center space-x-2 text-xs text-[#1C1D1A] hover:text-[#9E7448] transition-colors"
                   >
-                    <Send className="w-4 h-4 text-[#A8794A]" />
-                    <span>Личный контакт в Telegram @Anna_040506</span>
+                    <Send className="w-3.5 h-3.5 text-[#9E7448]" />
+                    <span>Личный Telegram @Anna_040506</span>
                   </a>
                 </div>
               </div>
             </div>
 
             {/* Narrative Story (7 cols) */}
-            <div className="lg:col-span-7 space-y-6">
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#20211F]">
+            <div className="lg:col-span-7 space-y-8">
+              <h2 className="font-serif text-3xl sm:text-4xl font-normal text-[#1C1D1A] leading-snug">
                 {locale === "ru"
                   ? "Путь в профессии: от первого объекта до более чем 5 000 проверенных квартир"
                   : "Kasbiy yo'l: birinchi obyektdan to 5 000 dan ortiq tekshirilgan xonadongacha"}
               </h2>
 
-              <div className="space-y-4 text-sm sm:text-base text-[#77746D] leading-relaxed">
+              <div className="space-y-4 text-sm sm:text-base text-[#6E6B64] leading-relaxed">
                 <p>
                   {locale === "ru"
-                    ? "Приехав в Ташкент из Уфы, я столкнулась с колоссальным строительным бумом в столице. Застройщики возводят десятки жилых комплексов, но скорость сдачи нередко опережает контроль качества."
+                    ? "Приехав в Ташкент из Уфы, я столкнулась с масштабным строительным бумом. Застройщики возводят десятки жилых комплексов, но скорость сдачи нередко опережает контроль качества."
                     : "Ufadan Toshkentga kelganimda, poytaxtdagi ulkan qurilish rivojlanishiga guvoh bo'ldim. Quruvchilar o'nlab majmualarni qurmoqda, biroq topshirish tezligi ko'pincha sifat nazoratidan o'zib ketadi."}
                 </p>
 
                 <p>
                   {locale === "ru"
-                    ? "Большинство покупателей подписывают акты приёма-передачи, не подозревая, что под слоем штукатурки скрыты мостики холода, неработающая вентиляция, растрескавшаяся стяжка или перекошенные оконные блоки. С этого момента я сделала своей миссией — бескомпромиссную защиту интересов будущего жильца."
+                    ? "Большинство покупателей подписывают акты приёма-передачи, не подозревая, что под слоем штукатурки скрыты мостики холода, неработающая вентиляция, растрескавшаяся стяжка или перекошенные оконные блоки. С этого момента я сделала своей миссией бескомпромиссную защиту интересов будущего жильца."
                     : "Ko'pchilik xaridorlar qabul qilish dalolatnomasini suvoq ostida sovuq ko'priklari, ishlamaydigan ventilyatsiya yoki buzilgan romlar borligini bilmay imzolaydilar. Shu paytdan boshlab mening maqsadim — kelajakdagi xonadon egasining manfaatlarini qat'iy himoya qilish bo'ldi."}
                 </p>
 
@@ -142,35 +136,35 @@ export default function AboutPage() {
               </div>
 
               {/* 3 Core Principles */}
-              <div className="pt-6 space-y-4">
-                <h3 className="font-serif text-xl font-bold text-[#20211F]">
+              <div className="pt-6 space-y-4 border-t border-[#1C1D1A]/10">
+                <h3 className="font-serif text-2xl font-normal text-[#1C1D1A]">
                   {locale === "ru" ? "Принципы нашей работы" : "Ishimizning asosiy tamoyillari"}
                 </h3>
 
                 <div className="space-y-3">
-                  <div className="p-4 bg-white border border-[#20211F]/10 rounded-sm">
-                    <span className="font-serif font-bold text-[#20211F] text-sm block">
+                  <div className="p-5 bg-white border border-[#1C1D1A]/10">
+                    <span className="font-serif text-base font-normal text-[#1C1D1A] block">
                       1. Инструментальная объективность
                     </span>
-                    <p className="text-xs text-[#77746D] mt-1">
+                    <p className="text-xs text-[#6E6B64] mt-1 leading-relaxed">
                       Каждое замечание опирается на показания поверенных приборов (лазер, тепловизор, тестер) и нормативные акты ШНК/КМК.
                     </p>
                   </div>
 
-                  <div className="p-4 bg-white border border-[#20211F]/10 rounded-sm">
-                    <span className="font-serif font-bold text-[#20211F] text-sm block">
+                  <div className="p-5 bg-white border border-[#1C1D1A]/10">
+                    <span className="font-serif text-base font-normal text-[#1C1D1A] block">
                       2. Полная независимость от застройщиков
                     </span>
-                    <p className="text-xs text-[#77746D] mt-1">
+                    <p className="text-xs text-[#6E6B64] mt-1 leading-relaxed">
                       Никаких компромиссов в актах: фиксируется абсолютно всё, что не соответствует нормативам качества.
                     </p>
                   </div>
 
-                  <div className="p-4 bg-white border border-[#20211F]/10 rounded-sm">
-                    <span className="font-serif font-bold text-[#20211F] text-sm block">
+                  <div className="p-5 bg-white border border-[#1C1D1A]/10">
+                    <span className="font-serif text-base font-normal text-[#1C1D1A] block">
                       3. Честная коммуникация
                     </span>
-                    <p className="text-xs text-[#77746D] mt-1">
+                    <p className="text-xs text-[#6E6B64] mt-1 leading-relaxed">
                       Мы не сгущаем краски и не преуменьшаем проблемы. Мы даем ясное понимание реального технического состояния объекта.
                     </p>
                   </div>

@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/components/providers/LanguageProvider";
-import { portfolioCases, ProjectCase } from "@/content/portfolio";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { portfolioCases } from "@/content/portfolio";
+import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface PortfolioGridProps {
@@ -32,19 +32,19 @@ export function PortfolioGrid({ showFilter = false, limit }: PortfolioGridProps)
   const displayed = limit ? filtered.slice(0, limit) : filtered;
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-12">
       {/* Category filters */}
       {showFilter && (
-        <div className="flex flex-wrap gap-2 pb-2">
+        <div className="flex flex-wrap gap-2.5 pb-4 border-b border-[#1C1D1A]/10">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
               className={cn(
-                "px-4 py-2 text-xs uppercase tracking-wider font-semibold rounded-sm transition-all",
+                "px-4 py-2 text-xs font-mono uppercase tracking-[0.16em] transition-all",
                 selectedCategory === cat.id
-                  ? "bg-[#20211F] text-[#F5F2EC]"
-                  : "bg-[#FAF8F5] text-[#77746D] hover:text-[#20211F] border border-[#20211F]/10"
+                  ? "bg-[#1C1D1A] text-[#F6F3EC]"
+                  : "bg-[#FAF8F4] text-[#6E6B64] hover:text-[#1C1D1A] border border-[#1C1D1A]/12"
               )}
             >
               {locale === "ru" ? cat.labelRu : cat.labelUz}
@@ -54,53 +54,52 @@ export function PortfolioGrid({ showFilter = false, limit }: PortfolioGridProps)
       )}
 
       {/* Grid of cases */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         {displayed.map((item) => (
           <Link
             key={item.slug}
             href={`/portfolio/${item.slug}`}
-            className="group bg-[#FAF8F5] border border-[#20211F]/10 rounded-sm overflow-hidden hover:border-[#A8794A] transition-all duration-300 shadow-editorial hover:shadow-luxury flex flex-col justify-between"
+            className="group bg-[#FAF8F4] border border-[#1C1D1A]/12 overflow-hidden hover:border-[#9E7448] transition-all duration-500 shadow-sm hover:shadow-2xl flex flex-col justify-between"
           >
             <div>
-              {/* Cover Image */}
-              <div className="relative aspect-[16/10] overflow-hidden bg-[#EAE5DC]">
+              {/* Cover Image Container */}
+              <div className="arch-img-frame aspect-[16/10] bg-[#EBE6DC] relative">
                 <Image
                   src={item.coverImage}
                   alt={locale === "ru" ? item.titleRu : item.titleUz}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover group-hover:scale-[1.03] transition-transform duration-1000"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#20211F]/70 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1D1A]/75 via-transparent to-transparent" />
 
-                {/* Category Badge */}
-                <div className="absolute top-4 left-4 bg-[#20211F]/80 text-[#F5F2EC] px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider rounded-sm backdrop-blur-sm">
+                {/* Category & Status Tags */}
+                <div className="absolute top-4 left-4 bg-[#1C1D1A]/80 text-[#F6F3EC] px-3 py-1 text-[9px] font-mono uppercase tracking-[0.2em] backdrop-blur-sm border border-white/10">
                   {locale === "ru" ? item.categoryLabelRu : item.categoryLabelUz}
                 </div>
 
-                {/* Status Badge */}
-                <div className="absolute bottom-3 left-4 text-xs font-serif text-[#F5F2EC] italic">
+                <div className="absolute bottom-4 left-4 font-mono text-[10px] text-[#B88E5E] tracking-wider uppercase">
                   {locale === "ru" ? item.statusRu : item.statusUz}
                 </div>
               </div>
 
               {/* Text Meta */}
               <div className="p-6 sm:p-8 space-y-3">
-                <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#20211F] group-hover:text-[#A8794A] transition-colors leading-snug">
+                <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors leading-snug">
                   {locale === "ru" ? item.titleRu : item.titleUz}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#77746D] leading-relaxed line-clamp-3">
+                <p className="text-xs sm:text-sm text-[#6E6B64] leading-relaxed line-clamp-3">
                   {locale === "ru" ? item.descriptionRu : item.descriptionUz}
                 </p>
 
                 {item.findingsRu && (
-                  <div className="pt-2">
-                    <span className="text-[10px] font-mono text-[#A8794A] uppercase tracking-wider block mb-1">
-                      {locale === "ru" ? "Ключевые фиксации:" : "Asosiy natijalar:"}
+                  <div className="pt-3 border-t border-[#1C1D1A]/8">
+                    <span className="text-[9px] font-mono text-[#9E7448] uppercase tracking-[0.2em] block mb-2 font-semibold">
+                      {locale === "ru" ? "КЛЮЧЕВЫЕ ФИКСАЦИИ ПО ШНК:" : "ASOSIY NATIJALAR:"}
                     </span>
-                    <ul className="space-y-1">
+                    <ul className="space-y-1.5">
                       {(locale === "ru" ? item.findingsRu : item.findingsUz || []).slice(0, 2).map((f, i) => (
-                        <li key={i} className="text-xs text-[#20211F]/80 flex items-start space-x-1.5">
-                          <span className="text-[#A8794A] mt-0.5">•</span>
+                        <li key={i} className="text-xs text-[#1C1D1A]/80 flex items-start space-x-2">
+                          <span className="text-[#9E7448] mt-0.5">•</span>
                           <span className="line-clamp-1">{f}</span>
                         </li>
                       ))}
@@ -111,9 +110,9 @@ export function PortfolioGrid({ showFilter = false, limit }: PortfolioGridProps)
             </div>
 
             {/* Read case study CTA link */}
-            <div className="px-6 sm:px-8 pb-6 pt-2 flex items-center justify-between text-xs font-mono tracking-wider uppercase text-[#20211F] group-hover:text-[#A8794A] transition-colors border-t border-[#20211F]/5">
-              <span>{locale === "ru" ? "Изучить кейс" : "Keysni o'rganish"}</span>
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            <div className="px-6 sm:px-8 pb-6 pt-3 flex items-center justify-between text-xs font-mono tracking-[0.2em] uppercase text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors border-t border-[#1C1D1A]/8">
+              <span>{locale === "ru" ? "Изучить кейс" : "Keysni ko'rish"}</span>
+              <ArrowUpRight className="w-4 h-4 opacity-70 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </div>
           </Link>
         ))}

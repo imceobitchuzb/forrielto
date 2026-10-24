@@ -36,29 +36,29 @@ export default function HomePage() {
       <ProcessTimeline />
 
       {/* SECTION F — SELECTED PROJECTS PREVIEW */}
-      <section className="py-20 sm:py-28 bg-[#F5F2EC] border-b border-[#20211F]/10">
+      <section className="py-24 sm:py-32 bg-[#F6F3EC] border-b border-[#1C1D1A]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 gap-6">
-            <div className="max-w-2xl">
-              <span className="text-[11px] font-mono tracking-widest text-[#A8794A] uppercase font-semibold">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between pb-8 mb-16 border-b border-[#1C1D1A]/10 gap-6">
+            <div className="max-w-3xl">
+              <span className="text-[10px] font-mono tracking-[0.25em] text-[#9E7448] uppercase block mb-2 font-semibold">
                 {locale === "ru" ? "ПРАКТИЧЕСКИЙ ОПЫТ" : "AMALIY TAJRIBA"}
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#20211F] mt-2 leading-[1.08]">
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#1C1D1A] leading-[1.06]">
                 {locale === "ru" ? "Избранные кейсы и обследования" : "Saralangan keyslar va tekshiruvlar"}
               </h2>
-              <p className="text-sm text-[#77746D] mt-2">
+              <p className="text-sm sm:text-base text-[#6E6B64] mt-3 leading-relaxed max-w-xl">
                 {locale === "ru"
-                  ? "Примеры реальных дефектов, скрытых работ и готовых интерьеров под контролем эксперта."
-                  : "Ekspert nazorati ostida aniqlangan kamchiliklar, yashirin ishlar va tayyor interyerlar namunalari."}
+                  ? "Документированные примеры скрытых дефектов, контроля технологических узлов и готовых интерьеров под надзором эксперта."
+                  : "Ekspert nazorati ostida aniqlangan kamchiliklar, yashirin ishlar va tayyor interyerlarning hujjatlashtirilgan namunalari."}
               </p>
             </div>
 
             <Link
               href="/portfolio"
-              className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-wider text-[#20211F] hover:text-[#A8794A] transition-colors border-b border-[#20211F]/30 pb-0.5"
+              className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.2em] text-[#1C1D1A] hover:text-[#9E7448] transition-colors border-b border-[#1C1D1A]/30 pb-1"
             >
-              <span>{locale === "ru" ? "Смотреть все проекты" : "Barcha loyihalarni ko'rish"}</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <span>{locale === "ru" ? "Смотреть все проекты" : "Barcha loyihalar"}</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
@@ -73,28 +73,33 @@ export default function HomePage() {
       <ReviewsSection />
 
       {/* SECTION I — FAQ */}
-      <section className="py-20 sm:py-28 bg-[#F5F2EC] border-b border-[#20211F]/10">
+      <section className="py-24 sm:py-32 bg-[#F6F3EC] border-b border-[#1C1D1A]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mb-14">
-            <span className="text-[11px] font-mono tracking-widest text-[#A8794A] uppercase font-semibold">
-              {locale === "ru" ? "ЧАСТЫЕ ВОПРОСЫ" : "KO'P SO'RALADIGAN SAVOLLAR"}
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#20211F] mt-2 leading-[1.08]">
-              {locale === "ru" ? "Ответы на ключевые вопросы" : "Asosiy savollarga javoblar"}
-            </h2>
-            <p className="text-sm text-[#77746D] mt-2">
-              {locale === "ru"
-                ? "Всё, что важно знать о сроках, стоимости, дефектных актах и ответственности сторон."
-                : "Muddatlar, narxlar, dalolatnomalar va tomonlar mas'uliyati haqida bilishingiz kerak bo'lgan barcha narsalar."}
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-14 border-b border-[#1C1D1A]/10 gap-6">
+            <div className="max-w-3xl">
+              <span className="text-[10px] font-mono tracking-[0.25em] text-[#9E7448] uppercase block mb-2 font-semibold">
+                {locale === "ru" ? "ЧАСТЫЕ ВОПРОСЫ" : "KO'P SO'RALADIGAN SAVOLLAR"}
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-normal text-[#1C1D1A] leading-[1.06]">
+                {locale === "ru" ? "Ответы на ключевые вопросы" : "Asosiy savollarga javoblar"}
+              </h2>
+              <p className="text-sm sm:text-base text-[#6E6B64] mt-3 leading-relaxed max-w-xl">
+                {locale === "ru"
+                  ? "Всё, что важно знать о сроках, стоимости, дефектных актах и ответственности сторон."
+                  : "Muddatlar, narxlar, dalolatnomalar va tomonlar mas'uliyati haqida bilishingiz kerak bo'lgan barcha ma'lumotlar."}
+              </p>
+            </div>
+            <div className="font-mono text-[10px] text-[#6E6B64] tracking-widest uppercase">
+              GENERAL INQUIRIES & PROTOCOL
+            </div>
           </div>
 
           <div className="max-w-3xl">
             <FAQSection limit={5} />
-            <div className="mt-8">
+            <div className="mt-10">
               <Link
                 href="/faq"
-                className="inline-flex items-center space-x-1.5 text-xs font-mono uppercase tracking-wider text-[#20211F] hover:text-[#A8794A] transition-colors border-b border-[#20211F]/30 pb-0.5"
+                className="inline-flex items-center space-x-1.5 text-xs font-mono uppercase tracking-[0.2em] text-[#1C1D1A] hover:text-[#9E7448] transition-colors border-b border-[#1C1D1A]/30 pb-0.5"
               >
                 <span>{locale === "ru" ? "Все вопросы и ответы →" : "Barcha savol-javoblar →"}</span>
               </Link>

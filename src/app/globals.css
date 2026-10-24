@@ -3,13 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #F5F2EC;
-  --bg-secondary: #EAE5DC;
-  --bg-card: #FAF8F5;
-  --text-primary: #20211F;
-  --text-secondary: #77746D;
-  --accent-bronze: #A8794A;
-  --border-subtle: rgba(32, 33, 31, 0.08);
+  --bg-primary: #F6F3EC;
+  --bg-secondary: #EBE6DC;
+  --bg-card: #FAF8F4;
+  --text-primary: #1C1D1A;
+  --text-secondary: #6E6B64;
+  --accent-bronze: #9E7448;
+  --accent-bronze-light: #B88E5E;
+  --accent-bronze-dark: #7A5630;
+  --border-subtle: rgba(28, 29, 26, 0.08);
+  --border-editorial: rgba(28, 29, 26, 0.14);
 }
 
 @layer base {
@@ -19,45 +22,98 @@
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   ::selection {
-    background-color: #20211F;
-    color: #F5F2EC;
+    background-color: #1C1D1A;
+    color: #F6F3EC;
   }
 
-  /* Custom subtle scrollbar */
+  /* Refined architectural scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
   }
   ::-webkit-scrollbar-track {
-    background: #F5F2EC;
+    background: #F6F3EC;
   }
   ::-webkit-scrollbar-thumb {
-    background: #DDD8CF;
-    border-radius: 3px;
+    background: #D8D2C5;
+    border-radius: 0px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #A8794A;
+    background: #9E7448;
   }
 }
 
-/* Editorial typography utilities */
-.font-editorial {
-  font-family: var(--font-cormorant), Georgia, serif;
+/* Haute Editorial Typography & Drafting Utilities */
+.font-serif {
+  font-family: var(--font-cormorant), "Didot", "Bodoni MT", "Cinzel", Georgia, serif;
 }
 
-.text-balance {
-  text-wrap: balance;
+.font-sans {
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Refined transitions */
+/* Hairline borders */
+.border-hairline {
+  border-width: 1px;
+  border-color: rgba(28, 29, 26, 0.09);
+}
+
+.border-hairline-dark {
+  border-width: 1px;
+  border-color: rgba(246, 243, 236, 0.12);
+}
+
+.border-hairline-bronze {
+  border-width: 1px;
+  border-color: rgba(158, 116, 72, 0.3);
+}
+
+/* Architectural image treatment */
+.arch-img-frame {
+  position: relative;
+  overflow: hidden;
+  background-color: #EBE6DC;
+}
+
+.arch-img-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 1px rgba(28, 29, 26, 0.08);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Subtle architectural grain */
+.bg-grain {
+  background-image: radial-gradient(rgba(28, 29, 26, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.bg-grain-dark {
+  background-image: radial-gradient(rgba(246, 243, 236, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Smooth editorial animation transitions */
 .transition-editorial {
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Subtle line accents */
-.editorial-line {
-  height: 1px;
-  background: linear-gradient(90deg, rgba(32, 33, 31, 0.15) 0%, rgba(168, 121, 74, 0.4) 50%, rgba(32, 33, 31, 0.15) 100%);
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

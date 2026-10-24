@@ -17,13 +17,12 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setServicesDropdown(false);
@@ -35,9 +34,9 @@ export function Header() {
       href: "/services",
       hasDropdown: true,
       subItems: [
-        { name: t.nav.apartmentInspection, href: "/apartment-inspection" },
-        { name: t.nav.renovationSupervision, href: "/renovation-supervision" },
-        { name: t.nav.turnkeyRenovation, href: "/turnkey-renovation" },
+        { name: t.nav.apartmentInspection, href: "/apartment-inspection", index: "01" },
+        { name: t.nav.renovationSupervision, href: "/renovation-supervision", index: "02" },
+        { name: t.nav.turnkeyRenovation, href: "/turnkey-renovation", index: "03" },
       ],
     },
     { name: t.nav.portfolio, href: "/portfolio" },
@@ -51,29 +50,28 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           isScrolled
-            ? "bg-[#F5F2EC]/90 backdrop-blur-md shadow-sm border-b border-[#20211F]/10 py-3.5"
-            : "bg-transparent py-5"
+            ? "bg-[#F6F3EC]/92 backdrop-blur-md border-b border-[#1C1D1A]/10 py-3.5"
+            : "bg-transparent py-6 border-b border-[#1C1D1A]/5"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Wordmark Logo */}
-            <Link
-              href="/"
-              className="group flex flex-col tracking-tight"
-            >
-              <span className="font-serif text-xl sm:text-2xl font-bold tracking-[0.08em] text-[#20211F] group-hover:text-[#A8794A] transition-colors leading-tight">
-                GONCHAROVA
+            {/* Architectural Wordmark Logo */}
+            <Link href="/" className="group flex flex-col">
+              <span className="font-serif text-xl sm:text-2xl font-normal tracking-[0.14em] text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors leading-none uppercase">
+                Goncharova
               </span>
-              <span className="font-mono text-[9px] tracking-[0.35em] text-[#77746D] uppercase">
-                EXPERT · TASHKENT
-              </span>
+              <div className="flex items-center space-x-1.5 mt-1 font-mono text-[9px] tracking-[0.3em] text-[#6E6B64] uppercase">
+                <span>Expert</span>
+                <span className="text-[#9E7448]">•</span>
+                <span>Tashkent</span>
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-7 text-[13px] tracking-wide uppercase font-medium text-[#20211F]/80">
+            <nav className="hidden lg:flex items-center space-x-8 text-[12px] tracking-[0.16em] uppercase font-sans font-medium text-[#1C1D1A]/85">
               {navLinks.map((item) =>
                 item.hasDropdown ? (
                   <div
@@ -85,35 +83,41 @@ export function Header() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex items-center space-x-1 py-1 hover:text-[#A8794A] transition-colors",
+                        "flex items-center space-x-1 py-1 hover:text-[#9E7448] transition-colors group",
                         pathname.startsWith("/services") ||
                           pathname.startsWith("/apartment") ||
                           pathname.startsWith("/renovation") ||
                           pathname.startsWith("/turnkey")
-                          ? "text-[#A8794A] font-semibold"
+                          ? "text-[#9E7448] font-semibold"
                           : ""
                       )}
                     >
                       <span>{item.name}</span>
-                      <ChevronDown className="w-3.5 h-3.5 opacity-60" />
+                      <ChevronDown className="w-3 h-3 opacity-50 group-hover:rotate-180 transition-transform duration-300" />
                     </Link>
 
-                    {/* Services Dropdown */}
+                    {/* Architectural Dropdown */}
                     {servicesDropdown && (
-                      <div className="absolute top-full left-0 w-64 pt-2 shadow-editorial">
-                        <div className="bg-[#FAF8F5] border border-[#20211F]/10 rounded-sm p-2 flex flex-col space-y-1">
+                      <div className="absolute top-full -left-4 w-72 pt-3 animate-fadeIn">
+                        <div className="bg-[#FAF8F4] border border-[#1C1D1A]/12 shadow-2xl p-3 flex flex-col space-y-1">
+                          <div className="px-3 py-1 text-[9px] font-mono tracking-widest text-[#9E7448] uppercase border-b border-[#1C1D1A]/8 pb-1.5 mb-1">
+                            Направления экспертизы
+                          </div>
                           {item.subItems?.map((sub) => (
                             <Link
                               key={sub.href}
                               href={sub.href}
                               className={cn(
-                                "px-3 py-2 text-xs normal-case tracking-normal rounded-sm transition-colors",
+                                "flex items-center justify-between px-3 py-2 text-xs normal-case tracking-normal transition-colors rounded-none",
                                 pathname === sub.href
-                                  ? "bg-[#20211F] text-[#F5F2EC]"
-                                  : "text-[#20211F] hover:bg-[#EAE5DC]"
+                                  ? "bg-[#1C1D1A] text-[#F6F3EC]"
+                                  : "text-[#1C1D1A] hover:bg-[#EBE6DC]"
                               )}
                             >
-                              {sub.name}
+                              <span className="font-serif font-medium">{sub.name}</span>
+                              <span className="font-mono text-[10px] opacity-60">
+                                № {sub.index}
+                              </span>
                             </Link>
                           ))}
                         </div>
@@ -125,10 +129,10 @@ export function Header() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "py-1 hover:text-[#A8794A] transition-colors relative",
+                      "py-1 hover:text-[#9E7448] transition-colors relative",
                       pathname === item.href
-                        ? "text-[#A8794A] font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-[#A8794A]"
-                        : ""
+                        ? "text-[#9E7448] font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-[#9E7448]"
+                        : "after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#9E7448] hover:after:w-full after:transition-all after:duration-300"
                     )}
                   >
                     {item.name}
@@ -138,76 +142,74 @@ export function Header() {
             </nav>
 
             {/* Right actions: Language toggle, direct Telegram, and CTA */}
-            <div className="hidden lg:flex items-center space-x-4">
-              {/* Language Switcher */}
-              <div className="flex items-center border border-[#20211F]/15 rounded-full p-0.5 text-xs font-mono">
+            <div className="hidden lg:flex items-center space-x-6">
+              {/* Minimalist Language Switcher */}
+              <div className="flex items-center space-x-2 text-[11px] font-mono tracking-wider">
                 <button
                   onClick={() => setLocale("ru")}
                   className={cn(
-                    "px-2.5 py-0.5 rounded-full transition-all",
+                    "transition-colors",
                     locale === "ru"
-                      ? "bg-[#20211F] text-[#F5F2EC]"
-                      : "text-[#77746D] hover:text-[#20211F]"
+                      ? "text-[#1C1D1A] font-bold border-b border-[#9E7448]"
+                      : "text-[#6E6B64] hover:text-[#1C1D1A]"
                   )}
                 >
                   RU
                 </button>
+                <span className="text-[#1C1D1A]/20">/</span>
                 <button
                   onClick={() => setLocale("uz")}
                   className={cn(
-                    "px-2.5 py-0.5 rounded-full transition-all",
+                    "transition-colors",
                     locale === "uz"
-                      ? "bg-[#20211F] text-[#F5F2EC]"
-                      : "text-[#77746D] hover:text-[#20211F]"
+                      ? "text-[#1C1D1A] font-bold border-b border-[#9E7448]"
+                      : "text-[#6E6B64] hover:text-[#1C1D1A]"
                   )}
                 >
                   UZ
                 </button>
               </div>
 
-              {/* Direct Telegram link */}
+              {/* Telegram direct contact */}
               <a
                 href={siteConfig.telegramDirectUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                title="Написать Анне в Telegram"
-                className="flex items-center space-x-1.5 text-xs text-[#20211F]/80 hover:text-[#A8794A] transition-colors border-b border-transparent hover:border-[#A8794A]"
+                title="Написать напрямую Анне в Telegram"
+                className="flex items-center space-x-1.5 text-xs text-[#1C1D1A]/80 hover:text-[#9E7448] transition-colors"
               >
-                <Send className="w-3.5 h-3.5 text-[#A8794A]" />
+                <Send className="w-3.5 h-3.5 text-[#9E7448]" />
                 <span className="font-mono text-[11px]">@Anna_040506</span>
               </a>
 
               {/* Consultation Button */}
               <Link
                 href="/contact"
-                className="inline-flex items-center space-x-2 px-4 py-2 bg-[#20211F] hover:bg-[#A8794A] text-[#F5F2EC] text-xs uppercase tracking-wider font-medium rounded-sm transition-all duration-300"
+                className="inline-flex items-center space-x-2 px-5 py-2.5 bg-[#1C1D1A] hover:bg-[#9E7448] text-[#F6F3EC] text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-300 border border-[#1C1D1A]"
               >
                 <span>{t.nav.bookConsultation}</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                <ArrowUpRight className="w-3.5 h-3.5 opacity-70" />
               </Link>
             </div>
 
             {/* Mobile Actions: Language + Hamburger */}
-            <div className="flex lg:hidden items-center space-x-3">
-              <div className="flex items-center border border-[#20211F]/15 rounded-full p-0.5 text-[11px] font-mono">
+            <div className="flex lg:hidden items-center space-x-4">
+              <div className="flex items-center space-x-1 text-[11px] font-mono">
                 <button
                   onClick={() => setLocale("ru")}
                   className={cn(
-                    "px-2 py-0.5 rounded-full transition-all",
-                    locale === "ru"
-                      ? "bg-[#20211F] text-[#F5F2EC]"
-                      : "text-[#77746D]"
+                    "px-1.5 py-0.5",
+                    locale === "ru" ? "text-[#1C1D1A] font-bold" : "text-[#6E6B64]"
                   )}
                 >
                   RU
                 </button>
+                <span>/</span>
                 <button
                   onClick={() => setLocale("uz")}
                   className={cn(
-                    "px-2 py-0.5 rounded-full transition-all",
-                    locale === "uz"
-                      ? "bg-[#20211F] text-[#F5F2EC]"
-                      : "text-[#77746D]"
+                    "px-1.5 py-0.5",
+                    locale === "uz" ? "text-[#1C1D1A] font-bold" : "text-[#6E6B64]"
                   )}
                 >
                   UZ
@@ -216,14 +218,10 @@ export function Header() {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-[#20211F] hover:text-[#A8794A] transition-colors focus:outline-none"
+                className="p-2 text-[#1C1D1A] hover:text-[#9E7448] transition-colors focus:outline-none"
                 aria-label="Toggle Menu"
               >
-                {mobileMenuOpen ? (
-                  <X className="w-6 h-6" />
-                ) : (
-                  <Menu className="w-6 h-6" />
-                )}
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
           </div>
@@ -232,67 +230,50 @@ export function Header() {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#F5F2EC] pt-20 px-6 pb-8 flex flex-col justify-between overflow-y-auto lg:hidden animate-fadeIn">
-          <div className="space-y-4">
-            <p className="text-[10px] font-mono tracking-widest text-[#77746D] uppercase">
-              Меню · Навигация
-            </p>
-            <div className="flex flex-col space-y-3 divide-y divide-[#20211F]/10">
+        <div className="fixed inset-0 z-40 bg-[#F6F3EC] pt-24 px-6 pb-8 flex flex-col justify-between overflow-y-auto lg:hidden animate-fadeIn">
+          <div className="space-y-6">
+            <div className="flex items-center justify-between border-b border-[#1C1D1A]/10 pb-3">
+              <span className="text-[10px] font-mono tracking-widest text-[#9E7448] uppercase">
+                Навигация по разделам
+              </span>
+              <span className="text-[10px] font-mono text-[#6E6B64]">ТАШКЕНТ</span>
+            </div>
+
+            <div className="flex flex-col space-y-4 text-left">
               <Link
                 href="/services"
-                className="text-lg font-serif font-medium text-[#20211F] pt-2"
+                className="text-2xl font-serif font-normal text-[#1C1D1A]"
               >
                 {t.nav.services}
               </Link>
-              <div className="pl-4 flex flex-col space-y-2 pt-2 text-sm text-[#77746D]">
-                <Link href="/apartment-inspection">
-                  — {t.nav.apartmentInspection}
-                </Link>
-                <Link href="/renovation-supervision">
-                  — {t.nav.renovationSupervision}
-                </Link>
-                <Link href="/turnkey-renovation">
-                  — {t.nav.turnkeyRenovation}
-                </Link>
+              <div className="pl-4 flex flex-col space-y-2.5 text-xs font-mono text-[#6E6B64] border-l border-[#9E7448]/40">
+                <Link href="/apartment-inspection">01. {t.nav.apartmentInspection}</Link>
+                <Link href="/renovation-supervision">02. {t.nav.renovationSupervision}</Link>
+                <Link href="/turnkey-renovation">03. {t.nav.turnkeyRenovation}</Link>
               </div>
 
-              <Link
-                href="/portfolio"
-                className="text-lg font-serif font-medium text-[#20211F] pt-3"
-              >
+              <Link href="/portfolio" className="text-2xl font-serif font-normal text-[#1C1D1A]">
                 {t.nav.portfolio}
               </Link>
-              <Link
-                href="/about"
-                className="text-lg font-serif font-medium text-[#20211F] pt-3"
-              >
+              <Link href="/about" className="text-2xl font-serif font-normal text-[#1C1D1A]">
                 {t.nav.about}
               </Link>
-              <Link
-                href="/reviews"
-                className="text-lg font-serif font-medium text-[#20211F] pt-3"
-              >
+              <Link href="/reviews" className="text-2xl font-serif font-normal text-[#1C1D1A]">
                 {t.nav.reviews}
               </Link>
-              <Link
-                href="/faq"
-                className="text-lg font-serif font-medium text-[#20211F] pt-3"
-              >
+              <Link href="/faq" className="text-2xl font-serif font-normal text-[#1C1D1A]">
                 {t.nav.faq}
               </Link>
-              <Link
-                href="/contact"
-                className="text-lg font-serif font-medium text-[#20211F] pt-3"
-              >
+              <Link href="/contact" className="text-2xl font-serif font-normal text-[#1C1D1A]">
                 {t.nav.contact}
               </Link>
             </div>
           </div>
 
-          <div className="pt-6 border-t border-[#20211F]/10 space-y-3">
+          <div className="pt-8 border-t border-[#1C1D1A]/10 space-y-3">
             <Link
               href="/contact"
-              className="w-full flex items-center justify-center space-x-2 py-3 bg-[#20211F] text-[#F5F2EC] text-sm uppercase tracking-wider font-medium rounded-sm"
+              className="w-full flex items-center justify-center space-x-2 py-3.5 bg-[#1C1D1A] text-[#F6F3EC] text-xs uppercase tracking-widest font-medium"
             >
               <span>{t.nav.bookConsultation}</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -301,9 +282,9 @@ export function Header() {
               href={siteConfig.telegramDirectUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center space-x-2 py-3 border border-[#20211F]/20 text-[#20211F] text-sm uppercase tracking-wider rounded-sm font-medium"
+              className="w-full flex items-center justify-center space-x-2 py-3 border border-[#1C1D1A]/20 text-[#1C1D1A] text-xs uppercase tracking-widest font-medium"
             >
-              <Send className="w-4 h-4 text-[#A8794A]" />
+              <Send className="w-4 h-4 text-[#9E7448]" />
               <span>Telegram: @Anna_040506</span>
             </a>
           </div>
