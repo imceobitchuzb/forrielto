@@ -35,6 +35,13 @@ export default function PortfolioPage() {
       <section className="py-24 bg-[#F6F3EC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <PortfolioGrid showFilter={true} />
+
+          {/* Factual accuracy disclaimer */}
+          <div className="mt-12 text-center text-[11px] font-mono text-[#6E6B64]/70 max-w-2xl mx-auto leading-relaxed border-t border-[#1C1D1A]/10 pt-6">
+            {locale === "ru"
+              ? "* Демонстрационные кейсы на основе реальной методологии и практики обследований жилых комплексов Ташкента. Точные персональные данные заказчиков скрыты в целях конфиденциальности."
+              : "* Toshkentdagi turar-joy majmualarini tekshirish amaliyoti asosidagi namunaviy keyslar. Mijozlarning shaxsiy ma'lumotlari maxfiylik maqsadida yashirilgan."}
+          </div>
         </div>
       </section>
 

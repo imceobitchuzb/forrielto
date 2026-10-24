@@ -132,6 +132,13 @@ export default function ReviewsPage() {
               </div>
             ))}
           </div>
+
+          {/* Editorial verification notice */}
+          <div className="mt-12 text-center text-[11px] font-mono text-[#6E6B64]/70 max-w-2xl mx-auto leading-relaxed">
+            {locale === "ru"
+              ? "* Примеры типичной обратной связи из блога эксперта. Оригинальные видео-отзывы и отклики заказчиков доступны в закреплённых хайлайтс Instagram @goncharova.expert."
+              : "* Ekspert blogidagi namunaviy fikrlar. Haqiqiy video-fikrlar va xabarlar Instagram @goncharova.expert blogining belgilangan bo'limlarida mavjud."}
+          </div>
         </div>
       </section>
 

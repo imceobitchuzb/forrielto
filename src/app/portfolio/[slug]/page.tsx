@@ -60,7 +60,7 @@ export default function CaseStudyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl space-y-4">
             <div className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.2em] text-[#9E7448] font-semibold">
-              <span>CASE PROTOCOL</span>
+              <span>{locale === "ru" ? "ДЕМОНСТРАЦИОННЫЙ КЕЙС" : "NAMUNAVIY KEYS"}</span>
               <span>//</span>
               <span>{locale === "ru" ? project.categoryLabelRu : project.categoryLabelUz}</span>
             </div>
@@ -204,7 +204,7 @@ export default function CaseStudyPage() {
                 </h2>
               </div>
               <div className="font-mono text-[10px] text-[#6E6B64] uppercase tracking-widest">
-                VERIFIED ASSETS
+                {locale === "ru" ? "МЕТОДОЛОГИЧЕСКИЙ АРХИВ" : "METODOLOGIK ARXIV"}
               </div>
             </div>
 
