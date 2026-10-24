@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import fs from "fs/promises";
+import path from "path";
 
 export async function POST(request: Request) {
   try {
@@ -13,30 +15,44 @@ export async function POST(request: Request) {
     // Server-side validation
     if (!name || typeof name !== "string" || name.trim().length < 2) {
       return NextResponse.json(
-        { error: "Пожалуйста, укажите корректное имя" },
+        { error: "Пожалуйста, укажите корректное имя (не менее 2 символов)" },
         { status: 400 }
       );
     }
 
-    if (!phone || typeof phone !== "string" || phone.trim().length < 7) {
+    // Phone validation: extract digits
+    const digitsOnly = (phone || "").replace(/\D/g, "");
+    if (!phone || typeof phone !== "string" || digitsOnly.length < 7) {
       return NextResponse.json(
-        { error: "Пожалуйста, укажите корректный номер телефона" },
+        { error: "Пожалуйста, укажите корректный номер телефона (не менее 7 цифр)" },
         { status: 400 }
       );
     }
 
     const leadData = {
+      id: Date.now().toString(),
       name: name.trim(),
       phone: phone.trim(),
-      service: service || "Не указана",
-      channel: channel || "Telegram",
+      service: service || "inspection",
+      channel: channel || "telegram",
       comment: comment ? comment.trim() : "—",
       createdAt: new Date().toISOString(),
+      tashkentTime: new Date().toLocaleString("ru-RU", { timeZone: "Asia/Tashkent" }),
     };
 
     console.log("=== NEW CONSULTATION LEAD RECEIVED ===", leadData);
 
-    // Optional Telegram notification if bot env credentials exist
+    // 1. Persistent storage: Append to data/leads.jsonl (Zero-lead-loss guarantee)
+    try {
+      const dataDir = path.join(process.cwd(), "data");
+      await fs.mkdir(dataDir, { recursive: true });
+      const filePath = path.join(dataDir, "leads.jsonl");
+      await fs.appendFile(filePath, JSON.stringify(leadData) + "\n", "utf-8");
+    } catch (fsError) {
+      console.error("Warning: Failed to append lead to disk:", fsError);
+    }
+
+    // 2. Optional Telegram bot dispatch if credentials exist
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
 
@@ -48,7 +64,7 @@ export async function POST(request: Request) {
           `🛠 *Услуга:* ${leadData.service}\n` +
           `💬 *Канал связи:* ${leadData.channel}\n` +
           `📝 *Комментарий:* ${leadData.comment}\n` +
-          `⏰ *Время:* ${new Date().toLocaleString("ru-RU", { timeZone: "Asia/Tashkent" })}`;
+          `⏰ *Время (Ташкент):* ${leadData.tashkentTime}`;
 
         await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
           method: "POST",
@@ -67,7 +83,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       message: "Заявка успешно принята",
-      leadId: Date.now().toString(),
+      leadId: leadData.id,
     });
   } catch (error) {
     console.error("Error processing consultation lead:", error);

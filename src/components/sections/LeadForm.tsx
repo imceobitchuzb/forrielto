@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { siteConfig } from "@/content/config";
 import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
@@ -26,10 +27,40 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Sync service if prop changes
+  useEffect(() => {
+    if (defaultService) {
+      setFormData((prev) => ({ ...prev, service: defaultService }));
+    }
+  }, [defaultService]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("loading");
     setErrorMessage("");
+
+    // Client-side quick validations
+    if (formData.name.trim().length < 2) {
+      setStatus("error");
+      setErrorMessage(
+        locale === "ru"
+          ? "Пожалуйста, введите ваше имя (не менее 2 символов)"
+          : "Iltimos, ismingizni to'liq kiriting (kamida 2 ta harf)"
+      );
+      return;
+    }
+
+    const digitsOnly = formData.phone.replace(/\D/g, "");
+    if (digitsOnly.length < 7) {
+      setStatus("error");
+      setErrorMessage(
+        locale === "ru"
+          ? "Пожалуйста, введите корректный номер телефона (не менее 7 цифр)"
+          : "Iltimos, to'g'ri telefon raqamini kiriting (kamida 7 ta raqam)"
+      );
+      return;
+    }
+
+    setStatus("loading");
 
     try {
       const response = await fetch("/api/consultation", {
@@ -50,14 +81,16 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
       setStatus("error");
       setErrorMessage(
         err.message ||
-          "Не удалось отправить форму. Пожалуйста, напишите нам напрямую в Telegram."
+          (locale === "ru"
+            ? "Не удалось отправить форму. Пожалуйста, напишите нам напрямую в Telegram."
+            : "Shaklni yuborishda xatolik yuz berdi. Iltimos, Telegram orqali yozing.")
       );
     }
   };
 
   if (status === "success") {
     return (
-      <div className="bg-[#FAF8F4] border border-[#9E7448]/40 p-8 sm:p-12 text-center space-y-6 animate-fadeIn shadow-2xl">
+      <div className="bg-[#FAF8F4] border border-[#9E7448]/40 p-6 sm:p-12 text-center space-y-6 animate-fadeIn shadow-2xl">
         <div className="w-14 h-14 mx-auto rounded-none bg-[#9E7448]/10 border border-[#9E7448] flex items-center justify-center text-[#9E7448]">
           <CheckCircle2 className="w-7 h-7" />
         </div>
@@ -72,15 +105,15 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
         <p className="text-xs sm:text-sm text-[#6E6B64] max-w-md mx-auto leading-relaxed">
           {t.contact.successDesc}
         </p>
-        <div className="pt-2">
+        <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href={siteConfig.telegramDirectUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 px-6 py-3.5 bg-[#1C1D1A] text-[#F6F3EC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#9E7448] transition-colors border border-[#1C1D1A]"
+            className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3.5 bg-[#1C1D1A] text-[#F6F3EC] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#9E7448] transition-colors border border-[#1C1D1A] min-h-[46px]"
           >
             <Send className="w-3.5 h-3.5 text-[#B88E5E]" />
-            <span>Перейти в Telegram (@Anna_040506)</span>
+            <span>Написать в Telegram (@Anna_040506)</span>
           </a>
         </div>
       </div>
@@ -210,14 +243,29 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
 
       {/* Consent & Submit */}
       <div className="space-y-4 pt-2">
-        <p className="text-[10px] font-mono text-[#6E6B64] leading-tight">
-          {t.contact.consent}
+        <p className="text-[10px] font-mono text-[#6E6B64] leading-normal">
+          {locale === "ru" ? (
+            <>
+              Нажимая кнопку, вы соглашаетесь на{" "}
+              <Link href="/privacy" className="underline hover:text-[#9E7448] transition-colors font-semibold">
+                обработку персональных данных
+              </Link>
+            </>
+          ) : (
+            <>
+              Tugmani bosish orqali siz{" "}
+              <Link href="/privacy" className="underline hover:text-[#9E7448] transition-colors font-semibold">
+                shaxsiy ma&apos;lumotlarni qayta ishlashga
+              </Link>{" "}
+              rozilik bildirasiz
+            </>
+          )}
         </p>
 
         <button
           type="submit"
           disabled={status === "loading"}
-          className="w-full min-h-[48px] flex items-center justify-center space-x-2 py-3.5 px-6 bg-[#1C1D1A] hover:bg-[#9E7448] active:scale-[0.99] text-[#F6F3EC] text-xs uppercase tracking-[0.25em] font-medium transition-all duration-300 disabled:opacity-50 border border-[#1C1D1A] touch-manipulation"
+          className="w-full min-h-[48px] flex items-center justify-center space-x-2 py-3.5 px-6 bg-[#1C1D1A] hover:bg-[#9E7448] active:scale-[0.99] text-[#F6F3EC] text-xs uppercase tracking-[0.25em] font-medium transition-all duration-300 disabled:opacity-50 border border-[#1C1D1A] touch-manipulation cursor-pointer"
         >
           {status === "loading" ? (
             <>
