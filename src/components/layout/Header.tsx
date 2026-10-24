@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { siteConfig } from "@/content/config";
-import { Menu, X, ArrowUpRight, Send, ChevronDown } from "lucide-react";
+import { Menu, X, ArrowUpRight, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -373,15 +373,6 @@ export function Header() {
                 <span>{t.nav.bookConsultation}</span>
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <a
-                href={siteConfig.telegramDirectUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full min-h-[48px] flex items-center justify-center space-x-2 py-3 border border-[#1C1D1A]/20 text-[#1C1D1A] text-xs uppercase tracking-widest font-medium"
-              >
-                <Send className="w-4 h-4 text-[#9E7448]" />
-                <span>Telegram: @Anna_040506</span>
-              </a>
             </div>
           </motion.div>
         )}
