@@ -1,0 +1,336 @@
+export type Locale = "ru" | "uz";
+
+export const translations = {
+  ru: {
+    nav: {
+      services: "Услуги",
+      apartmentInspection: "Приёмка новостроек",
+      renovationSupervision: "Контроль ремонта",
+      turnkeyRenovation: "Ремонт под ключ",
+      portfolio: "Кейсы и опыт",
+      about: "Об эксперте",
+      reviews: "Отзывы",
+      faq: "Вопросы",
+      contact: "Контакты",
+      bookConsultation: "Обсудить задачу",
+    },
+    hero: {
+      eyebrow: "НЕДВИЖИМОСТЬ · КАЧЕСТВО · ТЕХНАДЗОР / ТАШКЕНТ",
+      titleLine1: "КВАРТИРА.",
+      titleLine2: "ПРОВЕРЕННАЯ",
+      titleLine3: "НА КАЧЕСТВО.",
+      subtitle:
+        "Приёмка новостроек, контроль ремонта и ремонт под ключ в Ташкенте. Помогаю принимать решения уверенно — от получения ключей до готового интерьера.",
+      primaryCta: "Обсудить мою задачу",
+      secondaryCta: "Выбрать услугу",
+      metricApartments: "проверенных квартир",
+      metricAudience: "подписчиков блога",
+      metricMarket: "глубокое знание рынка Ташкента",
+      scrollHint: "Листайте вниз",
+    },
+    trust: {
+      label: "НЕЗАВИСИМЫЙ КОНТРОЛЬ КАЧЕСТВА",
+      headline: "Защищаю интересы собственника, а не застройщика или бригады.",
+      point1Title: "5 000+ квартир в Ташкенте",
+      point1Desc: "Проверены сотни жилых комплексов города: знаем нюансы каждого застройщика и скрытые уязвимости.",
+      point2Title: "Профессиональный инструмент",
+      point2Desc: "Лазерные нивелиры, влагомеры, тепловизоры, тестеры электросетей и поверенные измерительные приборы.",
+      point3Title: "Официальный дефектный акт",
+      point3Desc: "Аргументированный отчёт со ссылками на строительные нормы (ШНК / КМК) для обязательного устранения застройщиком.",
+    },
+    services: {
+      tag: "НАПРАВЛЕНИЯ РАБОТЫ",
+      headline: "Три ключевые услуги для вашей безопасности и комфорта",
+      subheadline:
+        "От первой проверки бетонной коробки до въезда в идеальный интерьер без переделок и переплат.",
+      s1: {
+        num: "01",
+        badge: "ПЕРЕД ПОДПИСАНИЕМ АКТА",
+        title: "Приёмка квартиры в новостройке",
+        desc: "Детальный инструментальный осмотр квартиры перед подписанием акта приёма-передачи. Выявляем кривизну стен, пустоты в стяжке, продувание окон, ошибки вентиляции и скрытые дефекты.",
+        benefit: "Застройщик устраняет недостатки за свой счёт до подписания документов.",
+        cta: "Заказать приёмку",
+        href: "/apartment-inspection",
+      },
+      s2: {
+        num: "02",
+        badge: "НАДЗОР ЗА СТРОИТЕЛЯМИ",
+        title: "Контроль ремонта (Технадзор)",
+        desc: "Независимый мониторинг каждого этапа ремонта: от скрытых инженерных работ и гидроизоляции до чистовой отделки. Предотвращаем технологические ошибки и перерасход бюджета.",
+        benefit: "Строители соблюдают технологии, а вы экономите нервы и тысячи долларов.",
+        cta: "Обсудить контроль",
+        href: "/renovation-supervision",
+      },
+      s3: {
+        num: "03",
+        badge: "ПОЛНЫЙ ЦИКЛ",
+        title: "Ремонт под ключ",
+        desc: "Комплексная реализация интерьера от проекта до финальной уборки. Прозрачная смета без внезапных доплат, проверенные мастера и персональный надзор эксперта.",
+        benefit: "Всё в одних руках: гарантия качества, точные сроки и спокойствие.",
+        cta: "Рассчитать ремонт",
+        href: "/turnkey-renovation",
+      },
+    },
+    whyExpert: {
+      tag: "ПОЧЕМУ ЭТО ВАЖНО",
+      headline: "Реальные риски при покупке и ремонте недвижимости",
+      subheadline:
+        "Большинство дефектов невозможно заметить невооруженным глазом при беглом осмотре. После подписания акта устранять их приходится за собственный счет.",
+      items: [
+        {
+          title: "Скрытые отклонения геометрии",
+          desc: "Перепады стен до 30-50 мм, непрямые углы 90° на кухне и в санузлах приводят к удорожанию мебели и переделке штукатурки.",
+        },
+        {
+          title: "Оконные блоки и продувание",
+          desc: "Перекошенные рамы, повреждённые стеклопакеты, отсутствие паро- и гидроизоляционных лент ведут к сквознякам и плесени.",
+        },
+        {
+          title: "Инженерия и вентиляция",
+          desc: "Опрокидывание тяги, отсутствие заземления, ошибки расключения щитка и слабый напор воды в стояках.",
+        },
+        {
+          title: "Проверка реальной площади",
+          desc: "Несоответствие фактической квадратуры проектной: иногда собственник переплачивает за метры, которых физически нет.",
+        },
+        {
+          title: "Стяжка пола и пустоты",
+          desc: "Трещины и бухтение стяжки, нарушенные деформационные швы — риск растрескивания дорогого керамогранита или паркета.",
+        },
+        {
+          title: "Нарушение сметы и технологий",
+          desc: "Бригады часто экономят на грунтовке, гидроизоляции и армировании, маскируя брак чистовыми материалами.",
+        },
+      ],
+    },
+    process: {
+      tag: "ПРОЗРАЧНЫЙ ПРОЦЕСС",
+      headline: "Как строится наша работа",
+      subheadline: "Никаких скрытых условий. Чёткий алгоритм действий на каждом этапе.",
+      tabs: {
+        inspection: "Приёмка квартиры",
+        supervision: "Контроль ремонта",
+        turnkey: "Ремонт под ключ",
+      },
+    },
+    expert: {
+      tag: "ЛИЧНЫЙ БРЕНД И ЭКСПЕРТИЗА",
+      headline: "Анна Гончарова",
+      subheadline: "Эксперт по новостройкам и качеству ремонта в Ташкенте",
+      quote:
+        "«Из Уфы в Ташкент, без связей построила имя в строительстве. Моя цель — чтобы каждый покупатель квартиры получил то качество, за которое заплатил.»",
+      bio1:
+        "За время практической работы в Ташкенте мной лично и моей командой обследовано более 5 000 квартир в ключевых новостройках столицы.",
+      bio2:
+        "Я не работаю на застройщиков и не получаю комиссионных от стройбригад. Мой единственный приоритет — интересы владельца недвижимости, соблюдение строительных норм и честная смета.",
+      cta: "Связаться в Telegram",
+    },
+    contact: {
+      tag: "СВЯЗАТЬСЯ СО МНОЙ",
+      headline: "Ваша квартира заслуживает внимания к деталям",
+      subheadline:
+        "Расскажите о вашей задаче — обсудим подходящий формат работы, сроки и следующие шаги.",
+      formTitle: "Заявка на консультацию или осмотр",
+      namePlaceholder: "Ваше имя",
+      phonePlaceholder: "Номер телефона (+998 ...)",
+      serviceSelect: "Выберите услугу",
+      serviceOptions: {
+        inspection: "Приёмка новостройки",
+        supervision: "Технадзор / Контроль ремонта",
+        turnkey: "Ремонт под ключ",
+        consult: "Первичная консультация",
+      },
+      channelSelect: "Удобный способ связи",
+      channelTelegram: "Telegram",
+      channelWhatsApp: "WhatsApp",
+      channelPhone: "Телефонный звонок",
+      commentPlaceholder: "Название ЖК, примерная площадь или описание задачи (необязательно)",
+      consent: "Нажимая кнопку, вы соглашаетесь на обработку персональных данных",
+      submit: "Отправить заявку",
+      submitting: "Отправка...",
+      successTitle: "Заявка принята!",
+      successDesc: "Анна свяжется с вами в течение рабочего времени в выбранном мессенджере.",
+      directConnect: "Или напишите напрямую:",
+      telegramChannel: "Канал в Telegram",
+      telegramDirect: "Личный контакт в Telegram",
+      instagramProfile: "Instagram блог (17K+)",
+    },
+    footer: {
+      aboutText:
+        "Независимая экспертиза недвижимости, инструментальная приёмка новостроек и профессиональный технадзор в Ташкенте.",
+      servicesTitle: "Услуги",
+      navigationTitle: "Навигация",
+      contactsTitle: "Контакты",
+      rights: "Все права защищены.",
+      privacy: "Политика конфиденциальности",
+      disclaimer:
+        "Информация на сайте носит информационный характер. Точные условия, перечень работ и стоимость определяются индивидуально перед началом оказания услуг.",
+    },
+  },
+  uz: {
+    nav: {
+      services: "Xizmatlar",
+      apartmentInspection: "Xonadonni qabul qilish",
+      renovationSupervision: "Ta'mir nazorati",
+      turnkeyRenovation: "Kalit ostida ta'mir",
+      portfolio: "Keyslar va tajriba",
+      about: "Ekspert haqida",
+      reviews: "Fikrlar",
+      faq: "Savollar",
+      contact: "Aloqa",
+      bookConsultation: "Vazifani muhokama qilish",
+    },
+    hero: {
+      eyebrow: "KO'CHMAS MULK · SIFAT · TEXNAZORAT / TOSHKENT",
+      titleLine1: "SIFATI",
+      titleLine2: "TEKSHIRILGAN",
+      titleLine3: "XONADON.",
+      subtitle:
+        "Toshkentda yangi uylarni qabul qilish, ta'mir sifatini nazorat qilish va kalit ostida ta'mirlash. Kalitni olishdan tortib to tayyor interyergacha ishonchli qarorlar qabul qilishga yordam beraman.",
+      primaryCta: "Vazifamni muhokama qilish",
+      secondaryCta: "Xizmatni tanlash",
+      metricApartments: "tekshirilgan xonadonlar",
+      metricAudience: "blog obunachilari",
+      metricMarket: "Toshkent bozorini chuqur bilish",
+      scrollHint: "Pastga aylantiring",
+    },
+    trust: {
+      label: "MUSTAQIL SIFAT NAZORATI",
+      headline: "Quruvchi yoki usta emas, mulkdorning manfaatlarini himoya qilaman.",
+      point1Title: "Toshkentda 5 000+ xonadon",
+      point1Desc: "Shahardagi yuzlab turar-joy majmualari tekshirilgan: har bir quruvchining o'ziga xos jihatlari va yashirin nuqsonlarini bilamiz.",
+      point2Title: "Professional asbob-uskunalar",
+      point2Desc: "Lazer sathi, namlik o'lchagichlar, teplovizorlar, elektr tarmoqlarini tekshirgichlar va sertifikatlangan asboblar.",
+      point3Title: "Rasmiy nuqsonlar dalolatnomasi",
+      point3Desc: "Qurilish me'yorlariga (ShNK / KMK) asoslangan holda quruvchi tomonidan bartaraf etilishi shart bo'lgan dalolatnoma.",
+    },
+    services: {
+      tag: "FAOLIYAT YO'NALISHLARI",
+      headline: "Xavfsizligingiz va qulayligingiz uchun uchta asosiy xizmat",
+      subheadline:
+        "Beton qutisidagi birinchi tekshiruvdan boshlab to xatosiz va ortiqcha xarajatlarsiz ideal interyergacha.",
+      s1: {
+        num: "01",
+        badge: "DALOLATNOMANI IMZOLASHDAN OLDIN",
+        title: "Yangi xonadonni qabul qilish",
+        desc: "Qabul qilish dalolatnomasini imzolashdan oldin xonadonni batafsil instrumental ko'rikdan o'tkazish. Devorlar egriligi, pol stajkasidagi bo'shliqlar, derazalardan shamol o'tishi va yashirin nuqsonlarni aniqlaymiz.",
+        benefit: "Quruvchi nuqsonlarni o'z hisobidan hujjat imzolanishidan oldin to'g'irlaydi.",
+        cta: "Qabul qilishga yozilish",
+        href: "/apartment-inspection",
+      },
+      s2: {
+        num: "02",
+        badge: "USTALAR USTIDAN NAZORAT",
+        title: "Ta'mir nazorati (Texnazorat)",
+        desc: "Ta'mirning har bir bosqichini mustaqil monitoring qilish: yashirin muhandislik ishlari va gidroizolyatsiyadan tortib to pardozlashgacha. Texnologik xatolar va ortiqcha xarajatlarning oldini olamiz.",
+        benefit: "Ustalar texnologiyaga rioya qiladi, siz esa asabingiz va minglab dollaringizni tejaysiz.",
+        cta: "Nazoratni muhokama qilish",
+        href: "/renovation-supervision",
+      },
+      s3: {
+        num: "03",
+        badge: "TO'LIQ TSIKL",
+        title: "Kalit ostida ta'mir",
+        desc: "Loyihadan to yakuniy tozalashgacha interyerni kompleks amalga oshirish. Kutilmagan to'lovlarsiz shaffof smeta, tajribali ustalar va ekspertning shaxsiy nazorati.",
+        benefit: "Barchasi bir qo'lda: sifat kafolati, aniq muddatlar va xotirjamlik.",
+        cta: "Ta'mirni hisoblash",
+        href: "/turnkey-renovation",
+      },
+    },
+    whyExpert: {
+      tag: "NEGA BU MUHIM",
+      headline: "Ko'chmas mulk sotib olish va ta'mirlashdagi haqiqiy xavflar",
+      subheadline:
+        "Ko'pgina nuqsonlarni oddiy ko'z bilan ko'rib bo'lmaydi. Dalolatnoma imzolangandan keyin ularni o'z hisobingizdan to'g'irlashga to'g'ri keladi.",
+      items: [
+        {
+          title: "Geometriyadagi yashirin og'ishlar",
+          desc: "Devorlarning 30-50 mm gacha og'ishi, oshxona va hammomda 90° burchaklarning yo'qligi mebel o'rnatishni qiyinlashtiradi.",
+        },
+        {
+          title: "Deraza bloklari va shamol o'tishi",
+          desc: "Qiyshiq o'rnatilgan romlar, shikastlangan oynalar va gidroizolyatsiya yo'qligi mog'or va shamolga olib keladi.",
+        },
+        {
+          title: "Muhandislik va ventilyatsiya",
+          desc: "Ventilyatsiya tortmasligi, yerga ulash (zazemleniye) yo'qligi, elektr qutisidagi xatolar va suv bosimi pastligi.",
+        },
+        {
+          title: "Haqiqiy maydonni tekshirish",
+          desc: "Haqiqiy kvadratura loyihadagiga to'g'ri kelmasligi: ba'zan mulkdor mavjud bo'lmagan metrlar uchun ortiqcha pul to'laydi.",
+        },
+        {
+          title: "Pol stajkasi va bo'shliqlar",
+          desc: "Stajkadagi yoriqlar va bo'shliqlar qimmatbaho kafel yoki parketning sinishiga sabab bo'ladi.",
+        },
+        {
+          title: "Smeta va texnologiyalarning buzilishi",
+          desc: "Ustalar ko'pincha gruntovka va gidroizolyatsiyadan tejab, nuqsonlarni pardoz ostiga yashirishadi.",
+        },
+      ],
+    },
+    process: {
+      tag: "SHAFFOF JARAYON",
+      headline: "Ishimiz qanday tashkil etilgan",
+      subheadline: "Yashirin shartlar yo'q. Har bir bosqichda aniq qadamlar ketma-ketligi.",
+      tabs: {
+        inspection: "Xonadonni qabul qilish",
+        supervision: "Ta'mir nazorati",
+        turnkey: "Kalit ostida ta'mir",
+      },
+    },
+    expert: {
+      tag: "SHAXSIY BREND VA EKSPERTIZA",
+      headline: "Anna Goncharova",
+      subheadline: "Toshkentda yangi uylar va ta'mir sifati bo'yicha ekspert",
+      quote:
+        "«Ufadan Toshkentga kelib, tanish-bilishsiz qurilish sohasida o'z nomimni qura oldim. Maqsadim — har bir xonadon egasi to'lagan puliga munosib sifatni olishi.»",
+      bio1:
+        "Toshkentdagi faoliyatim davomida men va jamoam tomonidan poytaxtning asosiy yangi turar-joy majmualarida 5 000 dan ortiq xonadonlar tekshirildi.",
+      bio2:
+        "Men quruvchilarga ishlamayman va usta brigadalaridan foiz olmayman. Yagona ustuvorligim — mulk egasining manfaatlari, me'yorlarga rioya etilishi va shaffof smeta.",
+      cta: "Telegram orqali bog'lanish",
+    },
+    contact: {
+      tag: "BOG'LANISH",
+      headline: "Sizning xonadoningiz e'tiborga loyiq",
+      subheadline:
+        "Vazifangiz haqida so'zlab bering — mos ish formati, muddatlar va keyingi qadamlarni muhokama qilamiz.",
+      formTitle: "Konsultatsiya yoki ko'rik uchun ariza",
+      namePlaceholder: "Ismingiz",
+      phonePlaceholder: "Telefon raqami (+998 ...)",
+      serviceSelect: "Xizmatni tanlang",
+      serviceOptions: {
+        inspection: "Yangi xonadonni qabul qilish",
+        supervision: "Texnazorat / Ta'mir nazorati",
+        turnkey: "Kalit ostida ta'mir",
+        consult: "Dastlabki konsultatsiya",
+      },
+      channelSelect: "Qulay aloqa usuli",
+      channelTelegram: "Telegram",
+      channelWhatsApp: "WhatsApp",
+      channelPhone: "Telefon qo'ng'irog'i",
+      commentPlaceholder: "Majmua nomi, taxminiy maydon yoki vazifa tavsifi (ixtiyoriy)",
+      consent: "Tugmani bosish orqali siz shaxsiy ma'lumotlarni qayta ishlashga rozilik bildirasiz",
+      submit: "Arizani yuborish",
+      submitting: "Yuborilmoqda...",
+      successTitle: "Arizangiz qabul qilindi!",
+      successDesc: "Anna siz bilan tez orada tanlangan messenjer orqali bog'lanadi.",
+      directConnect: "Yoki to'g'ridan-to'g'ri yozing:",
+      telegramChannel: "Telegram kanali",
+      telegramDirect: "Shaxsiy Telegram",
+      instagramProfile: "Instagram blog (17K+)",
+    },
+    footer: {
+      aboutText:
+        "Toshkentda ko'chmas mulkning mustaqil ekspertizasi, yangi uylarni instrumental qabul qilish va professional texnazorat.",
+      servicesTitle: "Xizmatlar",
+      navigationTitle: "Navigatsiya",
+      contactsTitle: "Aloqa",
+      rights: "Barcha huquqlar himoyalangan.",
+      privacy: "Maxfiylik siyosati",
+      disclaimer:
+        "Saytdagi ma'lumotlar tanishtiruv xarakteriga ega. Aniq shartlar, ishlar ro'yxati va narxlar xizmat ko'rsatishdan oldin individual tarzda belgilanadi.",
+    },
+  },
+};

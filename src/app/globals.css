@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #F5F2EC;
+  --bg-secondary: #EAE5DC;
+  --bg-card: #FAF8F5;
+  --text-primary: #20211F;
+  --text-secondary: #77746D;
+  --accent-bronze: #A8794A;
+  --border-subtle: rgba(32, 33, 31, 0.08);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #20211F;
+    color: #F5F2EC;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F5F2EC;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #DDD8CF;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #A8794A;
+  }
+}
+
+/* Editorial typography utilities */
+.font-editorial {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Refined transitions */
+.transition-editorial {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle line accents */
+.editorial-line {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(32, 33, 31, 0.15) 0%, rgba(168, 121, 74, 0.4) 50%, rgba(32, 33, 31, 0.15) 100%);
+}
