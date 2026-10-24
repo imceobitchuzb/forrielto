@@ -91,7 +91,7 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
     <form
       onSubmit={handleSubmit}
       className={cn(
-        "bg-[#FAF8F4] border border-[#1C1D1A]/15 p-6 sm:p-10 space-y-6 shadow-2xl",
+        "bg-[#FAF8F4] border border-[#1C1D1A]/15 p-5 sm:p-8 md:p-10 space-y-5 sm:space-y-6 shadow-2xl",
         className
       )}
     >
@@ -107,13 +107,13 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
       />
 
       <div className="space-y-1.5 pb-2 border-b border-[#1C1D1A]/10">
-        <span className="font-mono text-[9px] tracking-[0.25em] text-[#9E7448] uppercase block">
+        <span className="font-mono text-[9px] tracking-[0.25em] text-[#9E7448] uppercase block font-semibold">
           INQUIRY DOSSIER
         </span>
         <h3 className="text-2xl sm:text-3xl font-serif font-normal text-[#1C1D1A]">
           {t.contact.formTitle}
         </h3>
-        <p className="text-xs text-[#6E6B64]">
+        <p className="text-xs text-[#6E6B64] leading-relaxed">
           {locale === "ru"
             ? "Заполните форму — эксперт свяжется для согласования выезда на объект"
             : "Shaklni to'ldiring — ekspert obyektga chiqishni kelishish uchun bog'lanadi"}
@@ -130,7 +130,7 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Name */}
         <div className="space-y-1.5">
-          <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block">
+          <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block font-medium">
             {t.contact.namePlaceholder} *
           </label>
           <input
@@ -139,13 +139,13 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder={locale === "ru" ? "Имя и фамилия" : "Ismingiz"}
-            className="w-full px-3.5 py-3 bg-white border border-[#1C1D1A]/15 rounded-none text-sm text-[#1C1D1A] placeholder-[#6E6B64]/50 focus:outline-none focus:border-[#9E7448] transition-colors"
+            className="w-full min-h-[46px] px-3.5 py-2.5 bg-white border border-[#1C1D1A]/15 rounded-none text-base sm:text-sm text-[#1C1D1A] placeholder-[#6E6B64]/50 focus:outline-none focus:border-[#9E7448] transition-colors"
           />
         </div>
 
         {/* Phone */}
         <div className="space-y-1.5">
-          <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block">
+          <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block font-medium">
             {t.contact.phonePlaceholder} *
           </label>
           <input
@@ -154,7 +154,7 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="+998 (90) 000-00-00"
-            className="w-full px-3.5 py-3 bg-white border border-[#1C1D1A]/15 rounded-none text-sm text-[#1C1D1A] placeholder-[#6E6B64]/50 focus:outline-none focus:border-[#9E7448] transition-colors font-mono"
+            className="w-full min-h-[46px] px-3.5 py-2.5 bg-white border border-[#1C1D1A]/15 rounded-none text-base sm:text-sm text-[#1C1D1A] placeholder-[#6E6B64]/50 focus:outline-none focus:border-[#9E7448] transition-colors font-mono"
           />
         </div>
       </div>
@@ -162,13 +162,13 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Service */}
         <div className="space-y-1.5">
-          <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block">
+          <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block font-medium">
             {t.contact.serviceSelect}
           </label>
           <select
             value={formData.service}
             onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-            className="w-full px-3.5 py-3 bg-white border border-[#1C1D1A]/15 rounded-none text-xs text-[#1C1D1A] focus:outline-none focus:border-[#9E7448] transition-colors"
+            className="w-full min-h-[46px] px-3.5 py-2.5 bg-white border border-[#1C1D1A]/15 rounded-none text-base sm:text-sm text-[#1C1D1A] focus:outline-none focus:border-[#9E7448] transition-colors"
           >
             <option value="inspection">{t.contact.serviceOptions.inspection}</option>
             <option value="supervision">{t.contact.serviceOptions.supervision}</option>
@@ -179,13 +179,13 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
 
         {/* Preferred Channel */}
         <div className="space-y-1.5">
-          <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block">
+          <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block font-medium">
             {t.contact.channelSelect}
           </label>
           <select
             value={formData.channel}
             onChange={(e) => setFormData({ ...formData, channel: e.target.value })}
-            className="w-full px-3.5 py-3 bg-white border border-[#1C1D1A]/15 rounded-none text-xs text-[#1C1D1A] focus:outline-none focus:border-[#9E7448] transition-colors"
+            className="w-full min-h-[46px] px-3.5 py-2.5 bg-white border border-[#1C1D1A]/15 rounded-none text-base sm:text-sm text-[#1C1D1A] focus:outline-none focus:border-[#9E7448] transition-colors"
           >
             <option value="telegram">{t.contact.channelTelegram}</option>
             <option value="whatsapp">{t.contact.channelWhatsApp}</option>
@@ -196,7 +196,7 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
 
       {/* Comment / Details */}
       <div className="space-y-1.5">
-        <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block">
+        <label className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#6E6B64] block font-medium">
           {locale === "ru" ? "Детали объекта" : "Obyekt tafsilotlari"}
         </label>
         <textarea
@@ -204,7 +204,7 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
           value={formData.comment}
           onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
           placeholder={t.contact.commentPlaceholder}
-          className="w-full px-3.5 py-3 bg-white border border-[#1C1D1A]/15 rounded-none text-xs text-[#1C1D1A] placeholder-[#6E6B64]/50 focus:outline-none focus:border-[#9E7448] transition-colors resize-none"
+          className="w-full px-3.5 py-3 bg-white border border-[#1C1D1A]/15 rounded-none text-base sm:text-sm text-[#1C1D1A] placeholder-[#6E6B64]/50 focus:outline-none focus:border-[#9E7448] transition-colors resize-none"
         />
       </div>
 
@@ -217,7 +217,7 @@ export function LeadForm({ defaultService, className }: LeadFormProps) {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="w-full flex items-center justify-center space-x-2 py-4 bg-[#1C1D1A] hover:bg-[#9E7448] text-[#F6F3EC] text-xs uppercase tracking-[0.25em] font-medium transition-all duration-300 disabled:opacity-50 border border-[#1C1D1A]"
+          className="w-full min-h-[48px] flex items-center justify-center space-x-2 py-3.5 px-6 bg-[#1C1D1A] hover:bg-[#9E7448] active:scale-[0.99] text-[#F6F3EC] text-xs uppercase tracking-[0.25em] font-medium transition-all duration-300 disabled:opacity-50 border border-[#1C1D1A] touch-manipulation"
         >
           {status === "loading" ? (
             <>

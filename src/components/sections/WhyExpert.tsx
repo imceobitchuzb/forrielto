@@ -7,14 +7,14 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion/Motio
 import { ArrowUpRight } from "lucide-react";
 
 export function WhyExpert() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   return (
-    <section className="py-24 sm:py-32 bg-[#1C1D1A] text-[#F6F3EC] relative overflow-hidden bg-grain-dark border-b border-[#F6F3EC]/10">
+    <section className="py-20 sm:py-32 bg-[#1C1D1A] text-[#F6F3EC] relative overflow-hidden bg-grain-dark border-b border-[#F6F3EC]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <FadeIn>
-          <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-16 border-b border-white/10 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-12 sm:mb-16 border-b border-white/10 gap-6">
             <div className="max-w-3xl">
               <span className="text-[10px] font-mono tracking-[0.25em] text-[#B88E5E] uppercase block mb-2 font-semibold">
                 {t.whyExpert.tag}
@@ -33,11 +33,11 @@ export function WhyExpert() {
         </FadeIn>
 
         {/* 6 Engineering Vulnerability Panels in Staggered Grid */}
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {t.whyExpert.items.map((item, idx) => (
             <StaggerItem
               key={idx}
-              className="bg-[#242522] border border-white/10 p-7 sm:p-8 flex flex-col justify-between hover:border-[#9E7448] transition-colors group"
+              className="bg-[#242522] border border-white/10 p-5 sm:p-8 flex flex-col justify-between hover:border-[#9E7448] transition-colors group"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-white/10">
@@ -59,7 +59,7 @@ export function WhyExpert() {
               </div>
 
               <div className="pt-6 mt-6 border-t border-white/5 flex items-center justify-between text-[10px] font-mono uppercase text-[#B88E5E] tracking-wider">
-                <span>Устранение за счёт застройщика</span>
+                <span>{locale === "ru" ? "Устранение за счёт застройщика" : "Quruvchi hisobidan tuzatish"}</span>
                 <span>→</span>
               </div>
             </StaggerItem>
@@ -68,20 +68,24 @@ export function WhyExpert() {
 
         {/* Technical Callout Bar */}
         <FadeIn delay={0.2}>
-          <div className="mt-12 p-8 bg-[#242522] border-l-2 border-[#9E7448] border-r border-t border-b border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-1">
-              <h4 className="font-serif text-xl font-normal text-[#F6F3EC]">
-                Закон на стороне покупателя только до момента подписания приёмочного акта
+          <div className="mt-10 sm:mt-12 p-6 sm:p-8 bg-[#242522] border-l-2 border-[#9E7448] border-r border-t border-b border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="space-y-1.5">
+              <h4 className="font-serif text-lg sm:text-xl font-normal text-[#F6F3EC] leading-snug">
+                {locale === "ru"
+                  ? "Закон на стороне покупателя только до момента подписания приёмочного акта"
+                  : "Qonun faqat qabul qilish dalolatnomasini imzolaguncha siz tomonda"}
               </h4>
               <p className="text-xs sm:text-sm text-[#F6F3EC]/65 max-w-2xl leading-relaxed">
-                После подписания документов доказать вину строителей или застройщика в скрытых повреждениях практически невозможно. Инструментальный осмотр позволяет аргументированно обязать застройщика выполнить гарантийные обязательства.
+                {locale === "ru"
+                  ? "После подписания документов доказать вину строителей или застройщика в скрытых повреждениях практически невозможно. Инструментальный осмотр позволяет аргументированно обязать застройщика выполнить гарантийные обязательства."
+                  : "Hujjatlar imzolangach, yashirin nuqsonlar uchun quruvchining aybini isbotlash juda qiyin. Instrumental ko'rik quruvchini kafolat majburiyatlarini bajarishga majbur qiladi."}
               </p>
             </div>
             <Link
               href="/apartment-inspection"
-              className="flex-shrink-0 inline-flex items-center space-x-2 px-6 py-3.5 bg-[#9E7448] hover:bg-[#7A5630] text-white text-xs uppercase tracking-[0.2em] font-medium transition-colors"
+              className="w-full sm:w-auto flex-shrink-0 inline-flex items-center justify-center space-x-2 px-6 py-3.5 min-h-[46px] bg-[#9E7448] hover:bg-[#7A5630] text-white text-xs uppercase tracking-[0.2em] font-medium transition-colors touch-manipulation"
             >
-              <span>Как проходит осмотр</span>
+              <span>{locale === "ru" ? "Как проходит осмотр" : "Ko'rik qanday o'tadi"}</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>

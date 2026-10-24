@@ -208,7 +208,7 @@ export default function ApartmentInspectionPage() {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="p-8 bg-[#242522] border border-white/10 space-y-4 shadow-2xl">
+              <div className="p-5 sm:p-8 bg-[#242522] border border-white/10 space-y-4 shadow-2xl">
                 <div className="flex items-center justify-between border-b border-white/10 pb-3">
                   <span className="text-[11px] font-mono uppercase text-[#B88E5E] tracking-widest font-semibold">
                     ДЕФЕКТНЫЙ АКТ № 2024-EX
@@ -217,7 +217,7 @@ export default function ApartmentInspectionPage() {
                     ДЕМОНСТРАЦИОННЫЙ ОБРАЗЕЦ
                   </span>
                 </div>
-                <div className="space-y-2.5 text-xs font-mono text-[#F6F3EC]/80 leading-relaxed">
+                <div className="space-y-2.5 text-xs font-mono text-[#F6F3EC]/80 leading-relaxed break-words">
                   <p className="text-[#B88E5E]">Объект: Новостройка, г. Ташкент</p>
                   <p>1. Отклонение стены по вертикали: 18 мм (КМК 3.01.01-85 п. 2.14)</p>
                   <p>2. Продувание по периметру витражного остекления (ШНК 2.01.03-19)</p>

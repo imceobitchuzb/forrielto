@@ -43,14 +43,14 @@ export default function ReviewsPage() {
       </section>
 
       {/* Filter Tabs */}
-      <section className="py-12 bg-[#FAF8F4] border-b border-[#1C1D1A]/10">
+      <section className="py-8 sm:py-12 bg-[#FAF8F4] border-b border-[#1C1D1A]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap gap-2.5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex flex-nowrap overflow-x-auto no-scrollbar gap-2 pb-2 -mx-2 px-2 sm:mx-0 sm:px-0 sm:flex-wrap">
               <button
                 onClick={() => setFilter("all")}
                 className={cn(
-                  "px-4 py-2 text-xs font-mono uppercase tracking-[0.16em] transition-all",
+                  "flex-shrink-0 min-h-[44px] px-4 py-2.5 text-xs font-mono uppercase tracking-[0.16em] transition-all touch-manipulation",
                   filter === "all"
                     ? "bg-[#1C1D1A] text-[#F6F3EC]"
                     : "bg-white text-[#6E6B64] border border-[#1C1D1A]/12"
@@ -61,7 +61,7 @@ export default function ReviewsPage() {
               <button
                 onClick={() => setFilter("inspection")}
                 className={cn(
-                  "px-4 py-2 text-xs font-mono uppercase tracking-[0.16em] transition-all",
+                  "flex-shrink-0 min-h-[44px] px-4 py-2.5 text-xs font-mono uppercase tracking-[0.16em] transition-all touch-manipulation",
                   filter === "inspection"
                     ? "bg-[#1C1D1A] text-[#F6F3EC]"
                     : "bg-white text-[#6E6B64] border border-[#1C1D1A]/12"
@@ -72,7 +72,7 @@ export default function ReviewsPage() {
               <button
                 onClick={() => setFilter("supervision")}
                 className={cn(
-                  "px-4 py-2 text-xs font-mono uppercase tracking-[0.16em] transition-all",
+                  "flex-shrink-0 min-h-[44px] px-4 py-2.5 text-xs font-mono uppercase tracking-[0.16em] transition-all touch-manipulation",
                   filter === "supervision"
                     ? "bg-[#1C1D1A] text-[#F6F3EC]"
                     : "bg-white text-[#6E6B64] border border-[#1C1D1A]/12"
@@ -86,7 +86,7 @@ export default function ReviewsPage() {
               href={siteConfig.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.2em] text-[#1C1D1A] hover:text-[#9E7448] transition-colors border-b border-[#1C1D1A]/30 pb-0.5"
+              className="inline-flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.2em] text-[#1C1D1A] hover:text-[#9E7448] transition-colors border-b border-[#1C1D1A]/30 pb-0.5 min-h-[44px] self-start sm:self-auto"
             >
               <Instagram className="w-3.5 h-3.5 text-[#9E7448]" />
               <span>{locale === "ru" ? "Смотреть хайлайтс в Instagram →" : "Instagram highlights ko'rish →"}</span>

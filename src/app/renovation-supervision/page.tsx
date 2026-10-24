@@ -202,7 +202,7 @@ export default function RenovationSupervisionPage() {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="p-8 bg-[#242522] border border-white/10 space-y-4 shadow-2xl">
+              <div className="p-5 sm:p-8 bg-[#242522] border border-white/10 space-y-4 shadow-2xl">
                 <div className="flex items-center justify-between border-b border-white/10 pb-3">
                   <span className="text-[11px] font-mono uppercase text-[#B88E5E] tracking-widest font-semibold">
                     ТЕХНИЧЕСКИЙ ОТЧЕТ № 04
@@ -211,7 +211,7 @@ export default function RenovationSupervisionPage() {
                     ДЕМОНСТРАЦИОННЫЙ ПРИМЕР
                   </span>
                 </div>
-                <div className="space-y-2.5 text-xs font-mono text-[#F6F3EC]/80 leading-relaxed">
+                <div className="space-y-2.5 text-xs font-mono text-[#F6F3EC]/80 leading-relaxed break-words">
                   <p className="text-[#B88E5E]">Этап: Разводка сантехники и гидроизоляция санузлов</p>
                   <p>1. Трасса слива ванны смонтирована с контруклоном: предписано перебрать с уклоном 2%</p>
                   <p>2. Отсутствует гидроизоляционный бортик высотой 15 см по периметру перегородок</p>

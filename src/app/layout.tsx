@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
@@ -22,6 +22,13 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#F6F3EC",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://goncharova.expert"),
@@ -64,11 +71,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={`${cormorant.variable} ${inter.variable}`}>
-      <body className="font-sans bg-[#F6F3EC] text-[#1C1D1A] min-h-screen flex flex-col selection:bg-[#1C1D1A] selection:text-[#F6F3EC]">
+      <body className="font-sans bg-[#F6F3EC] text-[#1C1D1A] min-h-screen flex flex-col selection:bg-[#1C1D1A] selection:text-[#F6F3EC] overflow-x-hidden">
         <LanguageProvider>
           <ScrollProgress />
           <Header />
-          <main className="flex-grow">
+          <main className="flex-grow pb-24 lg:pb-0 overflow-x-hidden">
             <PageTransition>{children}</PageTransition>
           </main>
           <Footer />

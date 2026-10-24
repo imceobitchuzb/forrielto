@@ -117,14 +117,14 @@ export default function CaseStudyPage() {
 
               {/* Technical findings */}
               {project.findingsRu && (
-                <div className="p-8 bg-[#FAF8F4] border border-[#1C1D1A]/12 space-y-4 shadow-sm">
+                <div className="p-5 sm:p-8 bg-[#FAF8F4] border border-[#1C1D1A]/12 space-y-4 shadow-sm">
                   <h3 className="font-serif text-xl font-normal text-[#1C1D1A] flex items-center space-x-2 pb-3 border-b border-[#1C1D1A]/8">
                     <span>{locale === "ru" ? "Зафиксированные дефекты и отступления" : "Qayd etilgan nuqsonlar va og'ishlar"}</span>
                   </h3>
                   <ul className="space-y-3 pt-2">
                     {(locale === "ru" ? project.findingsRu : project.findingsUz || []).map((finding, idx) => (
                       <li key={idx} className="flex items-start space-x-3 text-xs sm:text-sm text-[#1C1D1A]">
-                        <span className="font-mono text-xs text-[#9E7448] mt-0.5 font-bold">
+                        <span className="font-mono text-xs text-[#9E7448] mt-0.5 font-bold flex-shrink-0">
                           0{idx + 1}.
                         </span>
                         <span>{finding}</span>
@@ -137,29 +137,29 @@ export default function CaseStudyPage() {
 
             {/* Right side: Summary Card & Action */}
             <div className="lg:col-span-5">
-              <div className="bg-[#FAF8F4] border border-[#1C1D1A]/15 p-6 sm:p-8 space-y-6 shadow-2xl sticky top-28">
+              <div className="bg-[#FAF8F4] border border-[#1C1D1A]/15 p-5 sm:p-8 space-y-6 shadow-2xl sticky top-28">
                 <span className="text-[10px] font-mono tracking-[0.25em] text-[#9E7448] uppercase font-semibold block pb-2 border-b border-[#1C1D1A]/10">
                   {locale === "ru" ? "ПАРАМЕТРЫ ОБЪЕКТА" : "OBYEKT PARAMETRLARI"}
                 </span>
 
                 <div className="space-y-4 divide-y divide-[#1C1D1A]/10 text-xs sm:text-sm font-mono">
-                  <div className="flex justify-between pt-2">
-                    <span className="text-[#6E6B64]">{locale === "ru" ? "Локация" : "Joylashuv"}</span>
-                    <span className="text-[#1C1D1A]">Ташкент, Узбекистан</span>
+                  <div className="flex justify-between gap-3 pt-2">
+                    <span className="text-[#6E6B64] flex-shrink-0">{locale === "ru" ? "Локация" : "Joylashuv"}</span>
+                    <span className="text-[#1C1D1A] text-right">Ташкент, Узбекистан</span>
                   </div>
-                  <div className="flex justify-between pt-3">
-                    <span className="text-[#6E6B64]">{locale === "ru" ? "Тип услуги" : "Xizmat turi"}</span>
-                    <span className="text-[#1C1D1A]">
+                  <div className="flex justify-between gap-3 pt-3">
+                    <span className="text-[#6E6B64] flex-shrink-0">{locale === "ru" ? "Тип услуги" : "Xizmat turi"}</span>
+                    <span className="text-[#1C1D1A] text-right">
                       {locale === "ru" ? project.categoryLabelRu : project.categoryLabelUz}
                     </span>
                   </div>
-                  <div className="flex justify-between pt-3">
-                    <span className="text-[#6E6B64]">{locale === "ru" ? "Эксперт" : "Ekspert"}</span>
-                    <span className="text-[#1C1D1A]">Анна Гончарова</span>
+                  <div className="flex justify-between gap-3 pt-3">
+                    <span className="text-[#6E6B64] flex-shrink-0">{locale === "ru" ? "Эксперт" : "Ekspert"}</span>
+                    <span className="text-[#1C1D1A] text-right">Анна Гончарова</span>
                   </div>
-                  <div className="flex justify-between pt-3">
-                    <span className="text-[#6E6B64]">{locale === "ru" ? "Статус" : "Holati"}</span>
-                    <span className="text-[#9E7448]">
+                  <div className="flex justify-between gap-3 pt-3">
+                    <span className="text-[#6E6B64] flex-shrink-0">{locale === "ru" ? "Статус" : "Holati"}</span>
+                    <span className="text-[#9E7448] text-right">
                       {locale === "ru" ? project.statusRu : project.statusUz}
                     </span>
                   </div>
@@ -168,7 +168,7 @@ export default function CaseStudyPage() {
                 <div className="pt-2 space-y-3">
                   <Link
                     href="/contact"
-                    className="w-full flex items-center justify-center space-x-2 py-4 bg-[#1C1D1A] hover:bg-[#9E7448] text-[#F6F3EC] text-xs uppercase tracking-[0.2em] font-medium transition-colors border border-[#1C1D1A]"
+                    className="w-full min-h-[46px] flex items-center justify-center space-x-2 py-3.5 px-4 bg-[#1C1D1A] hover:bg-[#9E7448] text-[#F6F3EC] text-xs uppercase tracking-[0.2em] font-medium transition-colors border border-[#1C1D1A] touch-manipulation"
                   >
                     <span>{locale === "ru" ? "Обсудить аналогичную задачу" : "O'xshash vazifani muhokama qilish"}</span>
                     <ArrowUpRight className="w-4 h-4 opacity-70" />
@@ -178,7 +178,7 @@ export default function CaseStudyPage() {
                     href={siteConfig.telegramDirectUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center space-x-2 py-3.5 border border-[#1C1D1A]/20 text-[#1C1D1A] hover:bg-[#EBE6DC] text-xs uppercase tracking-[0.2em] font-medium transition-colors"
+                    className="w-full min-h-[46px] flex items-center justify-center space-x-2 py-3.5 px-4 border border-[#1C1D1A]/20 text-[#1C1D1A] hover:bg-[#EBE6DC] text-xs uppercase tracking-[0.2em] font-medium transition-colors touch-manipulation"
                   >
                     <Send className="w-3.5 h-3.5 text-[#9E7448]" />
                     <span>Telegram</span>

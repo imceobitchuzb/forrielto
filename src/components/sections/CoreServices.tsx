@@ -121,7 +121,7 @@ export function CoreServices() {
                   <div className={`lg:col-span-6 space-y-6 ${isReversed ? "lg:order-1" : "lg:order-2"}`}>
                     <div className="space-y-2">
                       <span className="font-mono text-xs text-[#9E7448] tracking-widest uppercase block font-semibold">
-                        НАПРАВЛЕНИЕ {service.num}
+                        {locale === "ru" ? "НАПРАВЛЕНИЕ" : "YO'NALISH"} {service.num}
                       </span>
                       <h3 className="font-serif text-3xl sm:text-4xl font-normal text-[#1C1D1A] leading-tight">
                         <Link href={service.href} className="hover:text-[#9E7448] transition-colors">
@@ -138,7 +138,7 @@ export function CoreServices() {
                     <div className="space-y-2 pt-2 border-t border-[#1C1D1A]/10">
                       {service.specs.map((spec, i) => (
                         <div key={i} className="flex items-center space-x-2.5 text-xs sm:text-sm text-[#1C1D1A]">
-                          <span className="w-1.5 h-1.5 bg-[#9E7448]" />
+                          <span className="w-1.5 h-1.5 bg-[#9E7448] flex-shrink-0" />
                           <span>{spec}</span>
                         </div>
                       ))}
@@ -153,10 +153,10 @@ export function CoreServices() {
 
                     {/* Call to Action with subtle spring */}
                     <div className="pt-2">
-                      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-block">
+                      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto inline-block">
                         <Link
                           href={service.href}
-                          className="inline-flex items-center space-x-3 px-6 py-3.5 bg-[#1C1D1A] hover:bg-[#9E7448] text-[#F6F3EC] text-xs uppercase tracking-[0.2em] font-medium transition-colors border border-[#1C1D1A] group"
+                          className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 px-6 py-3.5 min-h-[46px] bg-[#1C1D1A] hover:bg-[#9E7448] text-[#F6F3EC] text-xs uppercase tracking-[0.2em] font-medium transition-colors border border-[#1C1D1A] group touch-manipulation"
                         >
                           <span>{service.cta}</span>
                           <ArrowUpRight className="w-4 h-4 opacity-70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

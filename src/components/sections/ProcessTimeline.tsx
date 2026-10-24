@@ -148,11 +148,11 @@ export function ProcessTimeline() {
   const currentSteps = processes[activeTab];
 
   return (
-    <section className="py-24 sm:py-32 bg-[#F6F3EC] border-b border-[#1C1D1A]/10">
+    <section className="py-20 sm:py-32 bg-[#F6F3EC] border-b border-[#1C1D1A]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <FadeIn>
-          <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 mb-12 border-b border-[#1C1D1A]/10 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between pb-6 sm:pb-8 mb-8 sm:mb-12 border-b border-[#1C1D1A]/10 gap-4 sm:gap-6">
             <div className="max-w-3xl">
               <span className="text-[10px] font-mono tracking-[0.25em] text-[#9E7448] uppercase block mb-2 font-semibold">
                 {t.process.tag}
@@ -164,14 +164,14 @@ export function ProcessTimeline() {
                 {t.process.subheadline}
               </p>
             </div>
-            <div className="font-mono text-[10px] text-[#6E6B64] tracking-widest uppercase">
+            <div className="font-mono text-[9px] sm:text-[10px] text-[#6E6B64] tracking-widest uppercase">
               STRUCTURED EXECUTION ROADMAP
             </div>
           </div>
         </FadeIn>
 
-        {/* Process Navigation Tabs with Animated Pill */}
-        <div className="flex flex-wrap gap-3 pb-8">
+        {/* Process Navigation Tabs: Swipeable on mobile without scrollbar */}
+        <div className="flex overflow-x-auto no-scrollbar flex-nowrap sm:flex-wrap gap-2 sm:gap-3 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
@@ -179,7 +179,7 @@ export function ProcessTimeline() {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
                 className={cn(
-                  "relative px-5 py-2.5 text-xs font-mono uppercase tracking-[0.16em] transition-colors",
+                  "relative min-h-[44px] flex-shrink-0 px-4 sm:px-5 py-2.5 text-xs font-mono uppercase tracking-[0.14em] sm:tracking-[0.16em] transition-colors whitespace-nowrap",
                   isActive
                     ? "text-[#F6F3EC]"
                     : "text-[#6E6B64] hover:text-[#1C1D1A] bg-[#FAF8F4] border border-[#1C1D1A]/12"
@@ -198,27 +198,27 @@ export function ProcessTimeline() {
           })}
         </div>
 
-        {/* 5 Phased Execution Steps with AnimatePresence */}
+        {/* 5 Phased Execution Steps */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 pt-6"
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 pt-2 sm:pt-6"
           >
             {currentSteps.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.06 }}
-                className="bg-[#FAF8F4] border border-[#1C1D1A]/12 p-6 flex flex-col justify-between hover:border-[#9E7448] transition-all group"
+                transition={{ duration: 0.35, delay: index * 0.05 }}
+                className="bg-[#FAF8F4] border border-[#1C1D1A]/12 p-5 sm:p-6 flex flex-col justify-between hover:border-[#9E7448] transition-all group"
               >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between pb-3 border-b border-[#1C1D1A]/8">
-                    <span className="font-mono text-xl font-normal text-[#9E7448]">
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex items-center justify-between pb-2.5 sm:pb-3 border-b border-[#1C1D1A]/8">
+                    <span className="font-mono text-lg sm:text-xl font-normal text-[#9E7448]">
                       {item.step}
                     </span>
                     <span className="font-mono text-[9px] text-[#6E6B64] tracking-wider uppercase">
@@ -235,7 +235,7 @@ export function ProcessTimeline() {
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-[#1C1D1A]/5 text-[9px] font-mono text-[#9E7448] uppercase tracking-wider">
+                <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-[#1C1D1A]/5 text-[9px] font-mono text-[#9E7448] uppercase tracking-wider">
                   {locale === "ru" ? `ЭТАП ${index + 1} / 5` : `${index + 1} / 5 BOSQICH`}
                 </div>
               </motion.div>

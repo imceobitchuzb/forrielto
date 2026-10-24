@@ -56,24 +56,24 @@ export default function FAQPage() {
           </p>
 
           {/* Search Input Bar */}
-          <div className="mt-10 max-w-xl relative">
-            <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6B64]/60" />
+          <div className="mt-8 sm:mt-10 max-w-xl relative">
+            <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6B64]/60 pointer-events-none" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={locale === "ru" ? "Поиск по вопросам (стяжка, сроки, акт)..." : "Savollar bo'yicha qidiruv..."}
-              className="w-full pl-12 pr-4 py-3.5 bg-[#FAF8F4] border border-[#1C1D1A]/15 rounded-none text-xs text-[#1C1D1A] placeholder-[#6E6B64]/50 focus:outline-none focus:border-[#9E7448] transition-colors"
+              className="w-full min-h-[46px] pl-12 pr-4 py-2.5 bg-[#FAF8F4] border border-[#1C1D1A]/15 rounded-none text-base sm:text-sm text-[#1C1D1A] placeholder-[#6E6B64]/50 focus:outline-none focus:border-[#9E7448] transition-colors"
             />
           </div>
         </div>
       </section>
 
       {/* Categories & Accordion */}
-      <section className="py-24 bg-[#F6F3EC]">
+      <section className="py-20 sm:py-24 bg-[#F6F3EC]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Category Pills */}
-          <div className="flex flex-wrap gap-2.5 pb-8 border-b border-[#1C1D1A]/10 mb-8">
+          <div className="flex flex-nowrap overflow-x-auto no-scrollbar gap-2 pb-4 -mx-2 px-2 sm:mx-0 sm:px-0 sm:flex-wrap border-b border-[#1C1D1A]/10 mb-8">
             {[
               { id: "all", labelRu: "Все вопросы", labelUz: "Barcha savollar" },
               { id: "inspection", labelRu: "Приёмка квартир", labelUz: "Xonadon qabuli" },
@@ -85,7 +85,7 @@ export default function FAQPage() {
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
                 className={cn(
-                  "px-4 py-2 text-xs font-mono uppercase tracking-[0.16em] transition-all",
+                  "flex-shrink-0 min-h-[44px] px-4 py-2.5 text-xs font-mono uppercase tracking-[0.16em] transition-all touch-manipulation",
                   activeCategory === cat.id
                     ? "bg-[#1C1D1A] text-[#F6F3EC]"
                     : "bg-[#FAF8F4] text-[#6E6B64] hover:text-[#1C1D1A] border border-[#1C1D1A]/12"

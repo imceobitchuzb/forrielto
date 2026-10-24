@@ -15,6 +15,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdown, setServicesDropdown] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(true);
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
 
   useEffect(() => {
@@ -24,6 +25,18 @@ export function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -52,27 +65,27 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           isScrolled
-            ? "bg-[#F6F3EC]/94 backdrop-blur-md border-b border-[#1C1D1A]/10 py-3.5 shadow-sm"
-            : "bg-transparent py-6 border-b border-[#1C1D1A]/5"
+            ? "bg-[#F6F3EC]/96 backdrop-blur-md border-b border-[#1C1D1A]/10 py-3 sm:py-3.5 shadow-sm"
+            : "bg-transparent py-4 sm:py-6 border-b border-[#1C1D1A]/5"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Architectural Wordmark Logo */}
-            <Link href="/" className="group flex flex-col">
-              <span className="font-serif text-xl sm:text-2xl font-normal tracking-[0.14em] text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors leading-none uppercase">
+            {/* Wordmark Logo */}
+            <Link href="/" className="group flex flex-col focus:outline-none">
+              <span className="font-serif text-lg sm:text-2xl font-normal tracking-[0.14em] text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors leading-none uppercase">
                 Goncharova
               </span>
-              <div className="flex items-center space-x-1.5 mt-1 font-mono text-[9px] tracking-[0.3em] text-[#6E6B64] uppercase">
+              <div className="flex items-center space-x-1.5 mt-0.5 sm:mt-1 font-mono text-[8px] sm:text-[9px] tracking-[0.25em] text-[#6E6B64] uppercase">
                 <span>Expert</span>
                 <span className="text-[#9E7448]">•</span>
                 <span>Tashkent</span>
               </div>
             </Link>
 
-            {/* Desktop Navigation with Animated Underline */}
+            {/* Desktop Navigation */}
             <nav
               onMouseLeave={() => setHoveredNav(null)}
               className="hidden lg:flex items-center space-x-8 text-[12px] tracking-[0.16em] uppercase font-sans font-medium text-[#1C1D1A]/85"
@@ -120,7 +133,7 @@ export function Header() {
                       )}
                     </Link>
 
-                    {/* Architectural Dropdown with Smooth Animation */}
+                    {/* Desktop Dropdown */}
                     <AnimatePresence>
                       {servicesDropdown && (
                         <motion.div
@@ -179,14 +192,13 @@ export function Header() {
               })}
             </nav>
 
-            {/* Right actions */}
+            {/* Desktop Right actions */}
             <div className="hidden lg:flex items-center space-x-6">
-              {/* Language Switcher */}
               <div className="flex items-center space-x-2 text-[11px] font-mono tracking-wider">
                 <button
                   onClick={() => setLocale("ru")}
                   className={cn(
-                    "transition-colors",
+                    "py-1 px-1 transition-colors",
                     locale === "ru"
                       ? "text-[#1C1D1A] font-bold border-b border-[#9E7448]"
                       : "text-[#6E6B64] hover:text-[#1C1D1A]"
@@ -198,7 +210,7 @@ export function Header() {
                 <button
                   onClick={() => setLocale("uz")}
                   className={cn(
-                    "transition-colors",
+                    "py-1 px-1 transition-colors",
                     locale === "uz"
                       ? "text-[#1C1D1A] font-bold border-b border-[#9E7448]"
                       : "text-[#6E6B64] hover:text-[#1C1D1A]"
@@ -208,7 +220,6 @@ export function Header() {
                 </button>
               </div>
 
-              {/* Telegram direct contact */}
               <a
                 href={siteConfig.telegramDirectUrl}
                 target="_blank"
@@ -220,7 +231,6 @@ export function Header() {
                 <span className="font-mono text-[11px]">@Anna_040506</span>
               </a>
 
-              {/* Consultation Button with subtle hover spring */}
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/contact"
@@ -232,34 +242,42 @@ export function Header() {
               </motion.div>
             </div>
 
-            {/* Mobile Actions: Language + Hamburger */}
-            <div className="flex lg:hidden items-center space-x-4">
-              <div className="flex items-center space-x-1 text-[11px] font-mono">
+            {/* Mobile Actions: Touch-friendly Language Switcher + Hamburger */}
+            <div className="flex lg:hidden items-center space-x-2 sm:space-x-3">
+              {/* Touch Language Switcher with minimum 36px touch targets */}
+              <div className="flex items-center border border-[#1C1D1A]/15 rounded-none bg-white/70 text-xs font-mono">
                 <button
                   onClick={() => setLocale("ru")}
                   className={cn(
-                    "px-1.5 py-0.5",
-                    locale === "ru" ? "text-[#1C1D1A] font-bold" : "text-[#6E6B64]"
+                    "min-h-[36px] min-w-[36px] px-2 py-1.5 transition-colors font-medium",
+                    locale === "ru"
+                      ? "bg-[#1C1D1A] text-[#F6F3EC]"
+                      : "text-[#6E6B64] active:bg-[#EBE6DC]"
                   )}
+                  aria-label="Переключить на русский язык"
                 >
                   RU
                 </button>
-                <span>/</span>
                 <button
                   onClick={() => setLocale("uz")}
                   className={cn(
-                    "px-1.5 py-0.5",
-                    locale === "uz" ? "text-[#1C1D1A] font-bold" : "text-[#6E6B64]"
+                    "min-h-[36px] min-w-[36px] px-2 py-1.5 transition-colors font-medium",
+                    locale === "uz"
+                      ? "bg-[#1C1D1A] text-[#F6F3EC]"
+                      : "text-[#6E6B64] active:bg-[#EBE6DC]"
                   )}
+                  aria-label="O'zbek tiliga o'tkazish"
                 >
                   UZ
                 </button>
               </div>
 
+              {/* Hamburger Button with comfortable 44x44px touch area */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-[#1C1D1A] hover:text-[#9E7448] transition-colors focus:outline-none"
-                aria-label="Toggle Menu"
+                className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2 text-[#1C1D1A] hover:text-[#9E7448] transition-colors focus:outline-none"
+                aria-label={mobileMenuOpen ? "Закрыть меню" : "Открыть меню"}
+                aria-expanded={mobileMenuOpen}
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -268,17 +286,17 @@ export function Header() {
         </div>
       </header>
 
-      {/* Animated Mobile Menu Drawer */}
+      {/* Mobile Menu Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-[#F6F3EC] pt-24 px-6 pb-8 flex flex-col justify-between overflow-y-auto lg:hidden"
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 bg-[#F6F3EC] pt-20 px-5 sm:px-6 pb-28 flex flex-col justify-between overflow-y-auto lg:hidden"
           >
-            <div className="space-y-6">
+            <div className="space-y-6 pt-2">
               <div className="flex items-center justify-between border-b border-[#1C1D1A]/10 pb-3">
                 <span className="text-[10px] font-mono tracking-widest text-[#9E7448] uppercase">
                   Навигация по разделам
@@ -286,41 +304,82 @@ export function Header() {
                 <span className="text-[10px] font-mono text-[#6E6B64]">ТАШКЕНТ</span>
               </div>
 
-              <div className="flex flex-col space-y-4 text-left">
-                <Link
-                  href="/services"
-                  className="text-2xl font-serif font-normal text-[#1C1D1A]"
-                >
-                  {t.nav.services}
-                </Link>
-                <div className="pl-4 flex flex-col space-y-2.5 text-xs font-mono text-[#6E6B64] border-l border-[#9E7448]/40">
-                  <Link href="/apartment-inspection">01. {t.nav.apartmentInspection}</Link>
-                  <Link href="/renovation-supervision">02. {t.nav.renovationSupervision}</Link>
-                  <Link href="/turnkey-renovation">03. {t.nav.turnkeyRenovation}</Link>
+              <div className="flex flex-col space-y-3.5 text-left">
+                {/* Services with expandable sub-links */}
+                <div>
+                  <button
+                    onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                    className="w-full flex items-center justify-between text-2xl font-serif font-normal text-[#1C1D1A] py-1 text-left"
+                  >
+                    <span>{t.nav.services}</span>
+                    <ChevronDown
+                      className={cn(
+                        "w-5 h-5 text-[#9E7448] transition-transform duration-300",
+                        mobileServicesOpen ? "rotate-180" : ""
+                      )}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {mobileServicesOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden pl-4 flex flex-col space-y-3 pt-2 pb-1 text-sm font-mono text-[#6E6B64] border-l-2 border-[#9E7448]/40 ml-1"
+                      >
+                        <Link href="/apartment-inspection" className="py-1 hover:text-[#1C1D1A]">
+                          01. {t.nav.apartmentInspection}
+                        </Link>
+                        <Link href="/renovation-supervision" className="py-1 hover:text-[#1C1D1A]">
+                          02. {t.nav.renovationSupervision}
+                        </Link>
+                        <Link href="/turnkey-renovation" className="py-1 hover:text-[#1C1D1A]">
+                          03. {t.nav.turnkeyRenovation}
+                        </Link>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
-                <Link href="/portfolio" className="text-2xl font-serif font-normal text-[#1C1D1A]">
+                <Link
+                  href="/portfolio"
+                  className="text-2xl font-serif font-normal text-[#1C1D1A] py-1"
+                >
                   {t.nav.portfolio}
                 </Link>
-                <Link href="/about" className="text-2xl font-serif font-normal text-[#1C1D1A]">
+                <Link
+                  href="/about"
+                  className="text-2xl font-serif font-normal text-[#1C1D1A] py-1"
+                >
                   {t.nav.about}
                 </Link>
-                <Link href="/reviews" className="text-2xl font-serif font-normal text-[#1C1D1A]">
+                <Link
+                  href="/reviews"
+                  className="text-2xl font-serif font-normal text-[#1C1D1A] py-1"
+                >
                   {t.nav.reviews}
                 </Link>
-                <Link href="/faq" className="text-2xl font-serif font-normal text-[#1C1D1A]">
+                <Link
+                  href="/faq"
+                  className="text-2xl font-serif font-normal text-[#1C1D1A] py-1"
+                >
                   {t.nav.faq}
                 </Link>
-                <Link href="/contact" className="text-2xl font-serif font-normal text-[#1C1D1A]">
+                <Link
+                  href="/contact"
+                  className="text-2xl font-serif font-normal text-[#1C1D1A] py-1"
+                >
                   {t.nav.contact}
                 </Link>
               </div>
             </div>
 
-            <div className="pt-8 border-t border-[#1C1D1A]/10 space-y-3">
+            {/* Bottom Actions inside drawer */}
+            <div className="pt-6 border-t border-[#1C1D1A]/10 space-y-3">
               <Link
                 href="/contact"
-                className="w-full flex items-center justify-center space-x-2 py-3.5 bg-[#1C1D1A] text-[#F6F3EC] text-xs uppercase tracking-widest font-medium"
+                className="w-full min-h-[48px] flex items-center justify-center space-x-2 py-3.5 bg-[#1C1D1A] text-[#F6F3EC] text-xs uppercase tracking-widest font-medium"
               >
                 <span>{t.nav.bookConsultation}</span>
                 <ArrowUpRight className="w-4 h-4" />
@@ -329,7 +388,7 @@ export function Header() {
                 href={siteConfig.telegramDirectUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center space-x-2 py-3 border border-[#1C1D1A]/20 text-[#1C1D1A] text-xs uppercase tracking-widest font-medium"
+                className="w-full min-h-[48px] flex items-center justify-center space-x-2 py-3 border border-[#1C1D1A]/20 text-[#1C1D1A] text-xs uppercase tracking-widest font-medium"
               >
                 <Send className="w-4 h-4 text-[#9E7448]" />
                 <span>Telegram: @Anna_040506</span>

@@ -33,10 +33,10 @@ export function PortfolioGrid({ showFilter = false, limit }: PortfolioGridProps)
   const displayed = limit ? filtered.slice(0, limit) : filtered;
 
   return (
-    <div className="space-y-12">
-      {/* Category filters with animated active pill */}
+    <div className="space-y-8 sm:space-y-12">
+      {/* Category filters: Swipeable on mobile without horizontal break */}
       {showFilter && (
-        <div className="flex flex-wrap gap-2.5 pb-4 border-b border-[#1C1D1A]/10">
+        <div className="flex overflow-x-auto no-scrollbar flex-nowrap sm:flex-wrap gap-2 sm:gap-2.5 pb-2 sm:pb-4 border-b border-[#1C1D1A]/10 -mx-4 px-4 sm:mx-0 sm:px-0">
           {categories.map((cat) => {
             const isActive = selectedCategory === cat.id;
             return (
@@ -44,7 +44,7 @@ export function PortfolioGrid({ showFilter = false, limit }: PortfolioGridProps)
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
                 className={cn(
-                  "relative px-4 py-2 text-xs font-mono uppercase tracking-[0.16em] transition-colors",
+                  "relative min-h-[42px] flex-shrink-0 px-3.5 sm:px-4 py-2 text-xs font-mono uppercase tracking-[0.14em] sm:tracking-[0.16em] transition-colors whitespace-nowrap",
                   isActive
                     ? "text-[#F6F3EC]"
                     : "text-[#6E6B64] hover:text-[#1C1D1A] bg-[#FAF8F4] border border-[#1C1D1A]/12"
@@ -64,8 +64,8 @@ export function PortfolioGrid({ showFilter = false, limit }: PortfolioGridProps)
         </div>
       )}
 
-      {/* Grid of cases with AnimatePresence & layout transitions */}
-      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      {/* Grid of cases */}
+      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
         <AnimatePresence mode="popLayout">
           {displayed.map((item) => (
             <motion.div
@@ -74,36 +74,36 @@ export function PortfolioGrid({ showFilter = false, limit }: PortfolioGridProps)
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link
                 href={`/portfolio/${item.slug}`}
-                className="group bg-[#FAF8F4] border border-[#1C1D1A]/12 overflow-hidden hover:border-[#9E7448] transition-all duration-500 shadow-sm hover:shadow-2xl flex flex-col justify-between h-full"
+                className="group bg-[#FAF8F4] border border-[#1C1D1A]/12 overflow-hidden hover:border-[#9E7448] transition-all duration-300 shadow-sm hover:shadow-2xl flex flex-col justify-between h-full"
               >
                 <div>
                   {/* Cover Image Container */}
-                  <div className="arch-img-frame aspect-[16/10] bg-[#EBE6DC] relative">
+                  <div className="arch-img-frame aspect-[16/10] bg-[#EBE6DC] relative w-full">
                     <Image
                       src={item.coverImage}
                       alt={locale === "ru" ? item.titleRu : item.titleUz}
                       fill
-                      className="object-cover group-hover:scale-[1.03] transition-transform duration-1000"
+                      className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1C1D1A]/75 via-transparent to-transparent pointer-events-none" />
 
                     {/* Category & Status Tags */}
-                    <div className="absolute top-4 left-4 bg-[#1C1D1A]/80 text-[#F6F3EC] px-3 py-1 text-[9px] font-mono uppercase tracking-[0.2em] backdrop-blur-sm border border-white/10 z-20">
+                    <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-[#1C1D1A]/80 text-[#F6F3EC] px-2.5 sm:px-3 py-1 text-[8px] sm:text-[9px] font-mono uppercase tracking-[0.18em] backdrop-blur-sm border border-white/10 z-20">
                       {locale === "ru" ? item.categoryLabelRu : item.categoryLabelUz}
                     </div>
 
-                    <div className="absolute bottom-4 left-4 font-mono text-[10px] text-[#B88E5E] tracking-wider uppercase z-20">
+                    <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 font-mono text-[9px] sm:text-[10px] text-[#B88E5E] tracking-wider uppercase z-20">
                       {locale === "ru" ? item.statusRu : item.statusUz}
                     </div>
                   </div>
 
                   {/* Text Meta */}
-                  <div className="p-6 sm:p-8 space-y-3">
-                    <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors leading-snug">
+                  <div className="p-5 sm:p-8 space-y-3">
+                    <h3 className="font-serif text-xl sm:text-3xl font-normal text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors leading-snug">
                       {locale === "ru" ? item.titleRu : item.titleUz}
                     </h3>
                     <p className="text-xs sm:text-sm text-[#6E6B64] leading-relaxed line-clamp-3">
@@ -112,7 +112,7 @@ export function PortfolioGrid({ showFilter = false, limit }: PortfolioGridProps)
 
                     {item.findingsRu && (
                       <div className="pt-3 border-t border-[#1C1D1A]/8">
-                        <span className="text-[9px] font-mono text-[#9E7448] uppercase tracking-[0.2em] block mb-2 font-semibold">
+                        <span className="text-[9px] font-mono text-[#9E7448] uppercase tracking-[0.2em] block mb-1.5 font-semibold">
                           {locale === "ru" ? "КЛЮЧЕВЫЕ ФИКСАЦИИ ПО ШНК:" : "ASOSIY NATIJALAR:"}
                         </span>
                         <ul className="space-y-1.5">
@@ -129,7 +129,7 @@ export function PortfolioGrid({ showFilter = false, limit }: PortfolioGridProps)
                 </div>
 
                 {/* Read case study CTA link */}
-                <div className="px-6 sm:px-8 pb-6 pt-3 flex items-center justify-between text-xs font-mono tracking-[0.2em] uppercase text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors border-t border-[#1C1D1A]/8">
+                <div className="px-5 sm:px-8 pb-5 sm:pb-6 pt-3 flex items-center justify-between text-xs font-mono tracking-[0.18em] sm:tracking-[0.2em] uppercase text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors border-t border-[#1C1D1A]/8 min-h-[44px]">
                   <span>{locale === "ru" ? "Изучить кейс" : "Keysni ko'rish"}</span>
                   <ArrowUpRight className="w-4 h-4 opacity-70 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </div>
