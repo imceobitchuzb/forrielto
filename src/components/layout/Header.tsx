@@ -220,17 +220,6 @@ export function Header() {
                 </button>
               </div>
 
-              <a
-                href={siteConfig.telegramDirectUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Написать напрямую Анне в Telegram"
-                className="flex items-center space-x-1.5 text-xs text-[#1C1D1A]/80 hover:text-[#9E7448] transition-colors"
-              >
-                <Send className="w-3.5 h-3.5 text-[#9E7448]" />
-                <span className="font-mono text-[11px]">@Anna_040506</span>
-              </a>
-
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/contact"
