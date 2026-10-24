@@ -74,12 +74,12 @@ export default function ServicesPage() {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="arch-img-frame aspect-[4/3] border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC]">
+              <div className="arch-img-frame aspect-[4/3] border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC] overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80"
-                  alt="Приёмка новостройки"
+                  src="/images/anna/anna-level-tool.jpg"
+                  alt="Приёмка новостройки — Анна Гончарова"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
               </div>
             </div>
@@ -92,12 +92,12 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-6 order-2 lg:order-1">
-              <div className="arch-img-frame aspect-[4/3] border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC]">
+              <div className="arch-img-frame aspect-[4/3] border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC] overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80"
-                  alt="Контроль ремонта"
+                  src="/images/anna/anna-helmet-tablet.jpg"
+                  alt="Контроль ремонта — Анна Гончарова"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
               </div>
             </div>
@@ -182,12 +182,12 @@ export default function ServicesPage() {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="arch-img-frame aspect-[4/3] border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC]">
+              <div className="arch-img-frame aspect-[4/3] border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC] overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"
-                  alt="Ремонт под ключ"
+                  src="/images/anna/anna-turnkey-banner.png"
+                  alt="Ремонт под ключ — Анна Гончарова"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
               </div>
             </div>

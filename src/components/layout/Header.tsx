@@ -71,10 +71,10 @@ export function Header() {
             : "bg-transparent py-4 sm:py-6 border-b border-[#1C1D1A]/5"
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 w-full">
+          <div className="flex items-center justify-between gap-6 xl:gap-12 w-full">
             {/* Wordmark Logo */}
-            <Link href="/" className="group flex flex-col focus:outline-none">
+            <Link href="/" className="group flex flex-col focus:outline-none flex-shrink-0">
               <span className="font-serif text-lg sm:text-2xl font-normal tracking-[0.14em] text-[#1C1D1A] group-hover:text-[#9E7448] transition-colors leading-none uppercase">
                 Goncharova
               </span>
@@ -85,10 +85,10 @@ export function Header() {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation with generous spacing */}
             <nav
               onMouseLeave={() => setHoveredNav(null)}
-              className="hidden lg:flex items-center space-x-8 text-[12px] tracking-[0.16em] uppercase font-sans font-medium text-[#1C1D1A]/85"
+              className="hidden lg:flex items-center gap-6 xl:gap-10 2xl:gap-14 text-[12px] xl:text-[13px] tracking-[0.18em] xl:tracking-[0.22em] uppercase font-sans font-medium text-[#1C1D1A]/85"
             >
               {navLinks.map((item) => {
                 const isActive =
@@ -113,7 +113,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex items-center space-x-1 py-1 transition-colors relative group",
+                        "flex items-center space-x-1.5 py-2 px-1 transition-colors relative group",
                         isActive ? "text-[#9E7448] font-semibold" : "hover:text-[#9E7448]"
                       )}
                     >
@@ -144,8 +144,8 @@ export function Header() {
                           className="absolute top-full -left-4 w-72 pt-3"
                         >
                           <div className="bg-[#FAF8F4] border border-[#1C1D1A]/12 shadow-2xl p-3 flex flex-col space-y-1">
-                            <div className="px-3 py-1 text-[9px] font-mono tracking-widest text-[#9E7448] uppercase border-b border-[#1C1D1A]/8 pb-1.5 mb-1">
-                              Направления экспертизы
+                            <div className="px-3 py-1 text-[9px] font-mono tracking-widest text-[#9E7448] uppercase border-b border-[#1C1D1A]/8 pb-1.5 mb-1 font-semibold">
+                              {locale === "ru" ? "Направления экспертизы" : "Ekspertiza yo'nalishlari"}
                             </div>
                             {item.subItems?.map((sub) => (
                               <Link
@@ -175,7 +175,7 @@ export function Header() {
                     href={item.href}
                     onMouseEnter={() => setHoveredNav(item.href)}
                     className={cn(
-                      "py-1 transition-colors relative",
+                      "py-2 px-1 transition-colors relative",
                       isActive ? "text-[#9E7448] font-semibold" : "hover:text-[#9E7448]"
                     )}
                   >
@@ -192,13 +192,13 @@ export function Header() {
               })}
             </nav>
 
-            {/* Desktop Right actions */}
-            <div className="hidden lg:flex items-center space-x-6">
+            {/* Desktop Right actions with spacious grouping */}
+            <div className="hidden lg:flex items-center gap-5 xl:gap-8 flex-shrink-0">
               <div className="flex items-center space-x-2 text-[11px] font-mono tracking-wider">
                 <button
                   onClick={() => setLocale("ru")}
                   className={cn(
-                    "py-1 px-1 transition-colors",
+                    "py-1 px-1.5 transition-colors cursor-pointer",
                     locale === "ru"
                       ? "text-[#1C1D1A] font-bold border-b border-[#9E7448]"
                       : "text-[#6E6B64] hover:text-[#1C1D1A]"
@@ -210,7 +210,7 @@ export function Header() {
                 <button
                   onClick={() => setLocale("uz")}
                   className={cn(
-                    "py-1 px-1 transition-colors",
+                    "py-1 px-1.5 transition-colors cursor-pointer",
                     locale === "uz"
                       ? "text-[#1C1D1A] font-bold border-b border-[#9E7448]"
                       : "text-[#6E6B64] hover:text-[#1C1D1A]"
@@ -234,7 +234,7 @@ export function Header() {
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center space-x-2 px-5 py-2.5 bg-[#1C1D1A] hover:bg-[#9E7448] text-[#F6F3EC] text-[11px] uppercase tracking-[0.2em] font-medium transition-colors border border-[#1C1D1A]"
+                  className="inline-flex items-center space-x-2 px-6 py-3 xl:px-7 xl:py-3.5 bg-[#1C1D1A] hover:bg-[#9E7448] text-[#F6F3EC] text-[11px] uppercase tracking-[0.2em] font-medium transition-colors border border-[#1C1D1A]"
                 >
                   <span>{t.nav.bookConsultation}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 opacity-70" />

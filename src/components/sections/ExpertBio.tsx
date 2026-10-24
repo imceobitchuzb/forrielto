@@ -17,20 +17,18 @@ export function ExpertBio() {
           {/* Portrait side (5 cols) */}
           <div className="lg:col-span-5 relative">
             <FadeIn delay={0.1}>
-              <div className="arch-img-frame aspect-[3/4] max-w-md mx-auto border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC]">
-                <ImageReveal delay={0.2}>
-                  <Image
-                    src="/images/anna/post2.png"
-                    alt="Анна Гончарова"
-                    fill
-                    className="object-cover"
-                  />
-                </ImageReveal>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1D1A]/80 via-transparent to-transparent pointer-events-none" />
+              <div className="arch-img-frame aspect-[3/4] max-w-md mx-auto border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC] overflow-hidden">
+                <Image
+                  src="/images/anna/anna-level-tool.jpg"
+                  alt="Анна Гончарова — независимый строительный эксперт"
+                  fill
+                  className="object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1D1A]/85 via-[#1C1D1A]/20 to-transparent pointer-events-none" />
 
                 <div className="absolute bottom-6 left-6 right-6 text-[#F6F3EC] z-20">
                   <p className="font-serif text-2xl font-normal">Анна Гончарова</p>
-                  <p className="text-[10px] text-[#B88E5E] font-mono uppercase tracking-[0.2em] mt-1">
+                  <p className="text-[10px] text-[#B88E5E] font-mono uppercase tracking-[0.2em] mt-1 font-semibold">
                     {locale === "ru"
                       ? "Независимый строительный эксперт"
                       : "Mustaqil qurilish eksperti"}
@@ -43,7 +41,7 @@ export function ExpertBio() {
             <div className="hidden sm:block absolute -top-4 -right-4 bg-[#1C1D1A] text-[#F6F3EC] p-4 text-center font-mono border border-white/10 shadow-xl z-20">
               <span className="text-sm font-bold text-[#B88E5E] block">5 000+</span>
               <span className="text-[9px] uppercase tracking-widest text-[#F6F3EC]/70 block mt-0.5">
-                ОБЪЕКТОВ
+                {locale === "ru" ? "ОБЪЕКТОВ" : "OBYEKT"}
               </span>
             </div>
           </div>
@@ -79,16 +77,28 @@ export function ExpertBio() {
             <FadeIn delay={0.45}>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-[#1C1D1A]/10">
                 <div className="p-4 bg-[#EBE6DC]/40 border border-[#1C1D1A]/8">
-                  <span className="text-[10px] font-mono text-[#6E6B64] block uppercase tracking-wider">Локация</span>
-                  <span className="font-serif text-lg text-[#1C1D1A] mt-1 block">Ташкент</span>
+                  <span className="text-[10px] font-mono text-[#6E6B64] block uppercase tracking-wider">
+                    {locale === "ru" ? "Локация" : "Joylashuv"}
+                  </span>
+                  <span className="font-serif text-lg text-[#1C1D1A] mt-1 block">
+                    {locale === "ru" ? "Ташкент" : "Toshkent"}
+                  </span>
                 </div>
                 <div className="p-4 bg-[#EBE6DC]/40 border border-[#1C1D1A]/8">
-                  <span className="text-[10px] font-mono text-[#6E6B64] block uppercase tracking-wider">Аудитория</span>
-                  <span className="font-serif text-lg text-[#9E7448] mt-1 block">17 000+ в Instagram</span>
+                  <span className="text-[10px] font-mono text-[#6E6B64] block uppercase tracking-wider">
+                    {locale === "ru" ? "Аудитория" : "Auditoriya"}
+                  </span>
+                  <span className="font-serif text-lg text-[#9E7448] mt-1 block">
+                    {locale === "ru" ? "17 000+ в Instagram" : "Instagramda 17 000+"}
+                  </span>
                 </div>
                 <div className="p-4 bg-[#EBE6DC]/40 border border-[#1C1D1A]/8 col-span-2 sm:col-span-1">
-                  <span className="text-[10px] font-mono text-[#6E6B64] block uppercase tracking-wider">Приоритет</span>
-                  <span className="font-serif text-lg text-[#1C1D1A] mt-1 block">Заказчик 100%</span>
+                  <span className="text-[10px] font-mono text-[#6E6B64] block uppercase tracking-wider">
+                    {locale === "ru" ? "Приоритет" : "Ustuvorlik"}
+                  </span>
+                  <span className="font-serif text-lg text-[#1C1D1A] mt-1 block">
+                    {locale === "ru" ? "Заказчик 100%" : "Mulkdor 100%"}
+                  </span>
                 </div>
               </div>
             </FadeIn>

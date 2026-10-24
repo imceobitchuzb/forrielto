@@ -20,7 +20,7 @@ export function CoreServices() {
       benefit: t.services.s1.benefit,
       cta: t.services.s1.cta,
       href: t.services.s1.href,
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80",
+      image: "/images/anna/anna-level-tool.jpg",
       specs: [
         locale === "ru" ? "Лазерная нивелировка стен и перегородок" : "Devorlar lazer tekshiruvi",
         locale === "ru" ? "Тепловизионный аудит продувания стеклопакетов" : "Derazalarning teplovizor auditi",
@@ -35,7 +35,7 @@ export function CoreServices() {
       benefit: t.services.s2.benefit,
       cta: t.services.s2.cta,
       href: t.services.s2.href,
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80",
+      image: "/images/anna/anna-helmet-tablet.jpg",
       specs: [
         locale === "ru" ? "Поэтапная приёмка скрытых инженерных работ" : "Yashirin ishlarni bosqichma-bosqich qabul qilish",
         locale === "ru" ? "Контроль гидроизоляции и уклонов сантехники" : "Gidroizolyatsiya va quvurlar nishabi nazorati",
@@ -50,7 +50,7 @@ export function CoreServices() {
       benefit: t.services.s3.benefit,
       cta: t.services.s3.cta,
       href: t.services.s3.href,
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+      image: "/images/anna/anna-turnkey-banner.png",
       specs: [
         locale === "ru" ? "Фиксированная смета и график в договоре" : "Shartnomada qat'iy smeta va ish jadvali",
         locale === "ru" ? "Проверенные мастера узкой квалификации" : "Tor mutaxassislikka ega saralangan ustalar",

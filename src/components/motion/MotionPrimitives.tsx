@@ -147,17 +147,16 @@ export function ImageReveal({
   const shouldReduceMotion = useReducedMotion();
 
   if (shouldReduceMotion) {
-    return <div className={className}>{children}</div>;
+    return <div className={`relative w-full h-full ${className || ""}`}>{children}</div>;
   }
 
   return (
-    <div className={`overflow-hidden relative ${className || ""}`}>
+    <div className={`overflow-hidden relative w-full h-full ${className || ""}`}>
       <motion.div
-        initial={{ scale: 1.08, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 1.1, delay, ease: easeEditorial }}
-        className="w-full h-full"
+        initial={{ scale: 1.05, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.8, delay, ease: easeEditorial }}
+        className="w-full h-full relative"
       >
         {children}
       </motion.div>

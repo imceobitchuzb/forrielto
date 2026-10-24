@@ -102,18 +102,18 @@ export default function ApartmentInspectionPage() {
             </div>
 
             <div className="lg:col-span-5">
-              <div className="arch-img-frame aspect-[4/5] border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC]">
+              <div className="arch-img-frame aspect-[4/5] border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC] overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80"
-                  alt="Инструментальный осмотр квартиры"
+                  src="/images/anna/anna-level-tool.jpg"
+                  alt="Инструментальный осмотр квартиры — Анна Гончарова"
                   fill
                   priority
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1D1A]/85 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6 text-[#F6F3EC]">
-                  <span className="text-[10px] font-mono text-[#B88E5E] uppercase tracking-widest block mb-1">
-                    СТАНДАРТ БЕЗОПАСНОСТИ
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1D1A]/85 via-[#1C1D1A]/20 to-transparent pointer-events-none" />
+                <div className="absolute bottom-6 left-6 right-6 text-[#F6F3EC] z-20">
+                  <span className="text-[10px] font-mono text-[#B88E5E] uppercase tracking-widest block mb-1 font-semibold">
+                    {locale === "ru" ? "СТАНДАРТ БЕЗОПАСНОСТИ" : "XAVFSIZLIK STANDARTI"}
                   </span>
                   <p className="font-serif text-xl sm:text-2xl font-normal">
                     {locale === "ru"

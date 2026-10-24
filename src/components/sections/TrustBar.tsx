@@ -6,7 +6,7 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion/Motio
 import { Shield, Wrench, FileCheck } from "lucide-react";
 
 export function TrustBar() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   const points = [
     {
@@ -14,21 +14,21 @@ export function TrustBar() {
       icon: Shield,
       title: t.trust.point1Title,
       desc: t.trust.point1Desc,
-      standard: "ШОСТ / КМК СТАНДАРТ",
+      standard: locale === "ru" ? "ШНК / КМК СТАНДАРТ" : "ShNK / KMK STANDARTI",
     },
     {
       index: "02",
       icon: Wrench,
       title: t.trust.point2Title,
       desc: t.trust.point2Desc,
-      standard: "ПОВЕРЕННЫЙ ИНСТРУМЕНТ",
+      standard: locale === "ru" ? "ПОВЕРЕННЫЙ ИНСТРУМЕНТ" : "SERTIFIKATLANGAN ASBOBLAR",
     },
     {
       index: "03",
       icon: FileCheck,
       title: t.trust.point3Title,
       desc: t.trust.point3Desc,
-      standard: "ЮРИДИЧЕСКАЯ СИЛА АКТА",
+      standard: locale === "ru" ? "ЮРИДИЧЕСКАЯ СИЛА АКТА" : "DALOLATNOMANING YURIDIK KUCHI",
     },
   ];
 

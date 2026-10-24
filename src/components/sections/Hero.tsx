@@ -33,24 +33,24 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[90vh] flex items-center pt-24 pb-12 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24 overflow-hidden border-b border-[#1C1D1A]/10 bg-grain">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+      <div className="max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10 w-full">
         {/* Top Architectural Drafting Coordinates */}
         <FadeIn delay={0.05}>
           <div className="flex items-center justify-between pb-4 sm:pb-8 mb-6 sm:mb-8 border-b border-[#1C1D1A]/10 font-mono text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.25em] text-[#6E6B64] uppercase">
             <div className="flex items-center space-x-1.5 sm:space-x-2">
               <span className="w-1.5 h-1.5 bg-[#9E7448] animate-pulse flex-shrink-0" />
-              <span>41°19&apos;N · ТАШКЕНТ</span>
+              <span>41°19&apos;N · {locale === "ru" ? "ТАШКЕНТ" : "TOSHKENT"}</span>
             </div>
             <div className="hidden sm:block">
-              <span>НЕЗАВИСИМАЯ СТРОИТЕЛЬНАЯ ЭКСПЕРТИЗА</span>
+              <span>{locale === "ru" ? "НЕЗАВИСИМАЯ СТРОИТЕЛЬНАЯ ЭКСПЕРТИЗА" : "MUSTAQIL QURILISH EKSPERTIZASI"}</span>
             </div>
             <div>
-              <span>REG. № 5000+ ОБЪЕКТОВ</span>
+              <span>{locale === "ru" ? "REG. № 5000+ ОБЪЕКТОВ" : "REG. № 5000+ OBYEKT"}</span>
             </div>
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-12 xl:gap-16 items-start">
           {/* Left Column: Headlines & Haute Editorial Copy (7 cols) */}
           <div className="lg:col-span-7 space-y-6 sm:space-y-8">
             {/* Small eyebrow label */}
@@ -65,17 +65,17 @@ export function Hero() {
             <h1 className="font-serif text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] font-normal tracking-tight sm:tracking-[-0.03em] text-[#1C1D1A] leading-[0.96] text-balance">
               <span className="block">
                 <TextLineReveal delay={0.15} duration={0.85}>
-                  КВАРТИРА.
+                  {t.hero.titleLine1}
                 </TextLineReveal>
               </span>
               <span className="block font-light italic text-[#9E7448] pl-1 sm:pl-6">
                 <TextLineReveal delay={0.25} duration={0.85}>
-                  ПРОВЕРЕННАЯ
+                  {t.hero.titleLine2}
                 </TextLineReveal>
               </span>
               <span className="block font-normal">
                 <TextLineReveal delay={0.35} duration={0.85}>
-                  НА КАЧЕСТВО.
+                  {t.hero.titleLine3}
                 </TextLineReveal>
               </span>
             </h1>
@@ -156,39 +156,37 @@ export function Hero() {
               }
               className="relative mx-auto max-w-md lg:max-w-none w-full"
             >
-              {/* Primary Architectural Photograph */}
-              <div className="arch-img-frame aspect-[16/11] sm:aspect-[4/5] bg-[#EBE6DC] border border-[#1C1D1A]/15 shadow-2xl relative w-full">
-                <ImageReveal delay={0.2}>
-                  <Image
-                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
-                    alt="Премиальная архитектура Ташкента"
-                    fill
-                    priority
-                    className="object-cover"
-                  />
-                </ImageReveal>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1D1A]/85 via-transparent to-transparent pointer-events-none" />
+              {/* Primary Photograph of Anna Goncharova */}
+              <div className="arch-img-frame aspect-[16/11] sm:aspect-[4/5] bg-[#EBE6DC] border border-[#1C1D1A]/15 shadow-2xl relative w-full overflow-hidden">
+                <Image
+                  src="/images/anna/anna-helmet-tablet.jpg"
+                  alt="Анна Гончарова — эксперт по качеству строительства в Ташкенте"
+                  fill
+                  priority
+                  className="object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1D1A]/85 via-[#1C1D1A]/20 to-transparent pointer-events-none" />
 
                 {/* Technical Annotations */}
-                <div className="absolute top-3 left-3 sm:top-4 sm:left-4 font-mono text-[8px] sm:text-[9px] tracking-widest text-[#F6F3EC]/80 uppercase bg-[#1C1D1A]/70 px-2 sm:px-2.5 py-1 backdrop-blur-sm border border-white/10 z-20">
-                  REF. 01 // HANDOVER PROTOCOL
+                <div className="absolute top-3 left-3 sm:top-4 sm:left-4 font-mono text-[8px] sm:text-[9px] tracking-widest text-[#F6F3EC]/90 uppercase bg-[#1C1D1A]/80 px-2 sm:px-2.5 py-1 backdrop-blur-sm border border-white/10 z-20">
+                  {locale === "ru" ? "REF. 01 // ПРОТОКОЛ ПРИЁМКИ" : "REF. 01 // QABUL PROTOKOLI"}
                 </div>
 
                 <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-[#F6F3EC] z-20">
-                  <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-widest text-[#9E7448] block mb-0.5">
-                    СТАНДАРТ ТЕХНАДЗОРА
+                  <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-widest text-[#9E7448] block mb-0.5 font-semibold">
+                    {locale === "ru" ? "СТАНДАРТ ТЕХНАДЗОРА" : "TEXNAZORAT STANDARTI"}
                   </span>
                   <p className="font-serif text-lg sm:text-2xl font-normal leading-snug">
-                    Инструментальная точность до 0.5 мм
+                    {locale === "ru" ? "Инструментальная точность до 0.5 мм" : "0.5 mm gacha instrumental aniqlik"}
                   </p>
                 </div>
               </div>
 
-              {/* Expert Card: on mobile sits naturally below/over image without negative margins */}
+              {/* Expert Card */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-3 sm:mt-0 sm:absolute sm:-bottom-8 sm:-left-6 lg:-left-8 bg-[#FAF8F4] border border-[#1C1D1A]/20 p-3.5 sm:p-5 shadow-xl sm:shadow-2xl flex items-center space-x-3.5 w-full sm:max-w-[320px] z-30"
               >
                 <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border border-[#9E7448] flex-shrink-0 bg-[#EBE6DC]">
@@ -209,8 +207,8 @@ export function Hero() {
                   <span className="text-[10px] sm:text-[11px] text-[#6E6B64] font-mono uppercase tracking-wider block">
                     {locale === "ru" ? "Ведущий эксперт" : "Yetakchi ekspert"}
                   </span>
-                  <span className="text-[9px] sm:text-[10px] font-mono text-[#9E7448] block">
-                    5 000+ проверенных квартир
+                  <span className="text-[9px] sm:text-[10px] font-mono text-[#9E7448] block font-semibold">
+                    {locale === "ru" ? "5 000+ проверенных квартир" : "5 000+ tekshirilgan xonadon"}
                   </span>
                 </div>
               </motion.div>

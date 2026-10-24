@@ -40,40 +40,40 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Visuals on the left (5 cols) */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="arch-img-frame aspect-[3/4] border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC]">
+              <div className="arch-img-frame aspect-[3/4] border border-[#1C1D1A]/15 shadow-2xl bg-[#EBE6DC] overflow-hidden">
                 <Image
-                  src="/images/anna/post2.png"
-                  alt="Анна Гончарова"
+                  src="/images/anna/anna-helmet-tablet.jpg"
+                  alt="Анна Гончарова — эксперт по качеству строительства"
                   fill
                   priority
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
               </div>
 
-              {/* Smaller secondary image */}
+              {/* Smaller secondary images */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="arch-img-frame aspect-square border border-[#1C1D1A]/10 bg-[#EBE6DC]">
+                <div className="arch-img-frame aspect-square border border-[#1C1D1A]/10 bg-[#EBE6DC] overflow-hidden">
                   <Image
-                    src="/images/anna/post3.png"
-                    alt="Анна Гончарова на объекте"
+                    src="/images/anna/anna-level-tool.jpg"
+                    alt="Анна Гончарова на объекте с уровнем"
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 </div>
-                <div className="arch-img-frame aspect-square border border-[#1C1D1A]/10 bg-[#EBE6DC]">
+                <div className="arch-img-frame aspect-square border border-[#1C1D1A]/10 bg-[#EBE6DC] overflow-hidden">
                   <Image
-                    src="/images/anna/post4.png"
-                    alt="Анна Гончарова"
+                    src="/images/anna/anna-turnkey-banner.png"
+                    alt="Анна Гончарова — ремонт под ключ"
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 </div>
               </div>
 
               {/* Social Channels Callout */}
               <div className="p-6 bg-[#EBE6DC]/40 border border-[#1C1D1A]/10 space-y-3 font-mono">
-                <span className="text-[10px] text-[#6E6B64] uppercase tracking-widest block">
-                  Официальные каналы эксперта
+                <span className="text-[10px] text-[#6E6B64] uppercase tracking-widest block font-semibold">
+                  {locale === "ru" ? "Официальные каналы эксперта" : "Ekspertning rasmiy kanallari"}
                 </span>
                 <div className="space-y-2">
                   <a
@@ -144,28 +144,34 @@ export default function AboutPage() {
                 <div className="space-y-3">
                   <div className="p-5 bg-white border border-[#1C1D1A]/10">
                     <span className="font-serif text-base font-normal text-[#1C1D1A] block">
-                      1. Инструментальная объективность
+                      {locale === "ru" ? "1. Инструментальная объективность" : "1. Instrumental xolislik"}
                     </span>
                     <p className="text-xs text-[#6E6B64] mt-1 leading-relaxed">
-                      Каждое замечание опирается на показания поверенных приборов (лазер, тепловизор, тестер) и нормативные акты ШНК/КМК.
+                      {locale === "ru"
+                        ? "Каждое замечание опирается на показания поверенных приборов (лазер, тепловизор, тестер) и нормативные акты ШНК/КМК."
+                        : "Har bir ko'rsatma tekshirilgan asboblar (lazer, teplovizor, tester) va ShNK/KMK qoidalariga asoslanadi."}
                     </p>
                   </div>
 
                   <div className="p-5 bg-white border border-[#1C1D1A]/10">
                     <span className="font-serif text-base font-normal text-[#1C1D1A] block">
-                      2. Полная независимость от застройщиков
+                      {locale === "ru" ? "2. Полная независимость от застройщиков" : "2. Quruvchilardan to'liq mustaqillik"}
                     </span>
                     <p className="text-xs text-[#6E6B64] mt-1 leading-relaxed">
-                      Никаких компромиссов в актах: фиксируется абсолютно всё, что не соответствует нормативам качества.
+                      {locale === "ru"
+                        ? "Никаких компромиссов в актах: фиксируется абсолютно всё, что не соответствует нормативам качества."
+                        : "Dalolatnomalarda hech qanday murosasizlik: sifat me'yorlariga to'g'ri kelmaydigan barcha holatlar aniq qayd etiladi."}
                     </p>
                   </div>
 
                   <div className="p-5 bg-white border border-[#1C1D1A]/10">
                     <span className="font-serif text-base font-normal text-[#1C1D1A] block">
-                      3. Честная коммуникация
+                      {locale === "ru" ? "3. Честная коммуникация" : "3. Halol va ochiq muloqot"}
                     </span>
                     <p className="text-xs text-[#6E6B64] mt-1 leading-relaxed">
-                      Мы не сгущаем краски и не преуменьшаем проблемы. Мы даем ясное понимание реального технического состояния объекта.
+                      {locale === "ru"
+                        ? "Мы не сгущаем краски и не преуменьшаем проблемы. Мы даем ясное понимание реального технического состояния объекта."
+                        : "Muammolarni bo'rttirmaymiz va kamaytirmaymiz. Obyektning haqiqiy texnik holati bo'yicha aniq xulosa beramiz."}
                     </p>
                   </div>
                 </div>
